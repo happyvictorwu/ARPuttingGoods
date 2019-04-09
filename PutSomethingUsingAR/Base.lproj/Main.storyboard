@@ -25,30 +25,45 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="🌹"/>
+                                <connections>
+                                    <action selector="didTapVase:" destination="BV1-FR-VrT" eventType="touchUpInside" id="4Fw-c2-Bba"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQv-Ve-Vbq" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
                                 <rect key="frame" x="20" y="256" width="50" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="💺"/>
+                                <connections>
+                                    <action selector="didTapChair:" destination="BV1-FR-VrT" eventType="touchUpInside" id="2vf-PL-CVF"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mgm-aC-ije" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
                                 <rect key="frame" x="20" y="354" width="50" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="🕯️"/>
+                                <connections>
+                                    <action selector="didTapCandle:" destination="BV1-FR-VrT" eventType="touchUpInside" id="uJW-SY-OjB"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cIA-c7-GhB" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
                                 <rect key="frame" x="20" y="437" width="50" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="📐"/>
+                                <connections>
+                                    <action selector="didTapMeasure:" destination="BV1-FR-VrT" eventType="touchUpInside" id="919-97-puS"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Hx-yH-RqB" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
                                 <rect key="frame" x="20" y="538" width="50" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="↺"/>
+                                <connections>
+                                    <action selector="didTapReset:" destination="BV1-FR-VrT" eventType="touchUpInside" id="HvL-Bq-Nte"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IB7-SE-Nlr" userLabel="Distance Label">
                                 <rect key="frame" x="78" y="461" width="67" height="21"/>

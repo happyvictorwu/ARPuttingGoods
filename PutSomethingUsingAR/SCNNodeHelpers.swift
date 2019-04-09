@@ -16,7 +16,7 @@ func createPlaneNode(center: vector_float3, extent: vector_float3) -> SCNNode {
     let plane = SCNPlane(width: CGFloat(extent.x), height: CGFloat(extent.z))
     
     let planeMaterial = SCNMaterial()
-    planeMaterial.diffuse.contents = UIColor.yellow.withAlphaComponent(0.2)
+    planeMaterial.diffuse.contents = UIColor.blue.withAlphaComponent(0.7)
     plane.materials = [planeMaterial]
     
     let planeNode = SCNNode(geometry: plane)    // 设置这个Node为上述的平面， 默认是打竖的
