@@ -7,12 +7,20 @@
 //
 
 import UIKit
-import SceneKit
 import ARKit
 
 class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
+    @IBOutlet weak var vaseButton: CustomButton!
+    @IBOutlet weak var chairButton: CustomButton!
+    @IBOutlet weak var candleButton: CustomButton!
+    @IBOutlet weak var measureButton: CustomButton!
+    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var trackingInfo: UILabel!
+    @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var crosshair: UIView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

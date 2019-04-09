@@ -57,8 +57,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1M-8e-0rU" userLabel="Tracking Info">
-                                <rect key="frame" x="174" y="800" width="67" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TrackingInfo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1M-8e-0rU" userLabel="Tracking Info">
+                                <rect key="frame" x="174" y="800" width="95" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -71,18 +71,36 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SME-Sn-pDN" userLabel="Crosshair">
+                                <rect key="frame" x="202" y="443" width="10" height="10"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="10" id="1ng-uU-7yO"/>
+                                    <constraint firstAttribute="width" constant="10" id="qiT-4n-iwF"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" id="GsS-dJ-CKf"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="bottom" secondItem="fQZ-KI-GVf" secondAttribute="bottom" id="VpT-BR-CcM"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="trailing" secondItem="fQZ-KI-GVf" secondAttribute="trailing" id="XyZ-9z-H8e"/>
+                            <constraint firstItem="SME-Sn-pDN" firstAttribute="centerY" secondItem="U0K-SW-4ec" secondAttribute="centerY" id="YTB-Ps-nS9"/>
+                            <constraint firstItem="SME-Sn-pDN" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="es2-bg-5Ja"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="top" secondItem="U0K-SW-4ec" secondAttribute="top" id="rJc-2c-zQA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                     </view>
                     <connections>
+                        <outlet property="candleButton" destination="mgm-aC-ije" id="f2e-nd-7n5"/>
+                        <outlet property="chairButton" destination="zQv-Ve-Vbq" id="9pL-P5-ltP"/>
+                        <outlet property="crosshair" destination="SME-Sn-pDN" id="5Jn-YR-taT"/>
+                        <outlet property="distanceLabel" destination="IB7-SE-Nlr" id="fOL-3W-bKX"/>
+                        <outlet property="measureButton" destination="cIA-c7-GhB" id="WW3-0s-bzs"/>
+                        <outlet property="messageLabel" destination="S3Q-wA-q4A" id="oGh-Xm-UMk"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
+                        <outlet property="trackingInfo" destination="J1M-8e-0rU" id="oRb-1r-LGd"/>
+                        <outlet property="vaseButton" destination="PAO-b2-HSs" id="amE-Ac-0Di"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
