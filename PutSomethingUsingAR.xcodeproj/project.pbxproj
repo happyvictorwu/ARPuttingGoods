@@ -8,19 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		72E7D8E9225C87F200C58C23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7D8E8225C87F200C58C23 /* AppDelegate.swift */; };
-		72E7D8EB225C87F200C58C23 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 72E7D8EA225C87F200C58C23 /* art.scnassets */; };
 		72E7D8ED225C87F200C58C23 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7D8EC225C87F200C58C23 /* ViewController.swift */; };
 		72E7D8F0225C87F200C58C23 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72E7D8EE225C87F200C58C23 /* Main.storyboard */; };
 		72E7D8F2225C87F400C58C23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72E7D8F1225C87F400C58C23 /* Assets.xcassets */; };
 		72E7D8F5225C87F400C58C23 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72E7D8F3225C87F400C58C23 /* LaunchScreen.storyboard */; };
 		72E7D8FD225C88DC00C58C23 /* SCNVector3Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7D8FC225C88DC00C58C23 /* SCNVector3Math.swift */; };
 		72E7D8FF225C8BD400C58C23 /* SCNNodeHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7D8FE225C8BD400C58C23 /* SCNNodeHelpers.swift */; };
+		72E7D901225C979200C58C23 /* Furniture.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 72E7D900225C979200C58C23 /* Furniture.scnassets */; };
+		72E7D903225C98C600C58C23 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7D902225C98C600C58C23 /* CustomButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		72E7D8E5225C87F200C58C23 /* PutSomethingUsingAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PutSomethingUsingAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72E7D8E8225C87F200C58C23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		72E7D8EA225C87F200C58C23 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		72E7D8EC225C87F200C58C23 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		72E7D8EF225C87F200C58C23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		72E7D8F1225C87F400C58C23 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -28,6 +28,8 @@
 		72E7D8F6225C87F400C58C23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		72E7D8FC225C88DC00C58C23 /* SCNVector3Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3Math.swift; sourceTree = "<group>"; };
 		72E7D8FE225C8BD400C58C23 /* SCNNodeHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNNodeHelpers.swift; sourceTree = "<group>"; };
+		72E7D900225C979200C58C23 /* Furniture.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Furniture.scnassets; sourceTree = "<group>"; };
+		72E7D902225C98C600C58C23 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +63,6 @@
 			isa = PBXGroup;
 			children = (
 				72E7D8E8225C87F200C58C23 /* AppDelegate.swift */,
-				72E7D8EA225C87F200C58C23 /* art.scnassets */,
 				72E7D8EC225C87F200C58C23 /* ViewController.swift */,
 				72E7D8EE225C87F200C58C23 /* Main.storyboard */,
 				72E7D8F1225C87F400C58C23 /* Assets.xcassets */,
@@ -69,6 +70,8 @@
 				72E7D8F6225C87F400C58C23 /* Info.plist */,
 				72E7D8FC225C88DC00C58C23 /* SCNVector3Math.swift */,
 				72E7D8FE225C8BD400C58C23 /* SCNNodeHelpers.swift */,
+				72E7D900225C979200C58C23 /* Furniture.scnassets */,
+				72E7D902225C98C600C58C23 /* CustomButton.swift */,
 			);
 			path = PutSomethingUsingAR;
 			sourceTree = "<group>";
@@ -131,7 +134,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72E7D8EB225C87F200C58C23 /* art.scnassets in Resources */,
+				72E7D901225C979200C58C23 /* Furniture.scnassets in Resources */,
 				72E7D8F5225C87F400C58C23 /* LaunchScreen.storyboard in Resources */,
 				72E7D8F2225C87F400C58C23 /* Assets.xcassets in Resources */,
 				72E7D8F0225C87F200C58C23 /* Main.storyboard in Resources */,
@@ -149,6 +152,7 @@
 				72E7D8FD225C88DC00C58C23 /* SCNVector3Math.swift in Sources */,
 				72E7D8ED225C87F200C58C23 /* ViewController.swift in Sources */,
 				72E7D8E9225C87F200C58C23 /* AppDelegate.swift in Sources */,
+				72E7D903225C98C600C58C23 /* CustomButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
