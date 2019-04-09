@@ -14,6 +14,7 @@
 		72E7D8F2225C87F400C58C23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72E7D8F1225C87F400C58C23 /* Assets.xcassets */; };
 		72E7D8F5225C87F400C58C23 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72E7D8F3225C87F400C58C23 /* LaunchScreen.storyboard */; };
 		72E7D8FD225C88DC00C58C23 /* SCNVector3Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7D8FC225C88DC00C58C23 /* SCNVector3Math.swift */; };
+		72E7D8FF225C8BD400C58C23 /* SCNNodeHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7D8FE225C8BD400C58C23 /* SCNNodeHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		72E7D8F4225C87F400C58C23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		72E7D8F6225C87F400C58C23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		72E7D8FC225C88DC00C58C23 /* SCNVector3Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3Math.swift; sourceTree = "<group>"; };
+		72E7D8FE225C8BD400C58C23 /* SCNNodeHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNNodeHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				72E7D8F3225C87F400C58C23 /* LaunchScreen.storyboard */,
 				72E7D8F6225C87F400C58C23 /* Info.plist */,
 				72E7D8FC225C88DC00C58C23 /* SCNVector3Math.swift */,
+				72E7D8FE225C8BD400C58C23 /* SCNNodeHelpers.swift */,
 			);
 			path = PutSomethingUsingAR;
 			sourceTree = "<group>";
@@ -142,6 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72E7D8FF225C8BD400C58C23 /* SCNNodeHelpers.swift in Sources */,
 				72E7D8FD225C88DC00C58C23 /* SCNVector3Math.swift in Sources */,
 				72E7D8ED225C87F200C58C23 /* ViewController.swift in Sources */,
 				72E7D8E9225C87F200C58C23 /* AppDelegate.swift in Sources */,
