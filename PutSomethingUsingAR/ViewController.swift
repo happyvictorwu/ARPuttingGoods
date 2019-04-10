@@ -23,6 +23,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var chairButton: CustomButton!
     @IBOutlet weak var candleButton: CustomButton!
     @IBOutlet weak var measureButton: CustomButton!
+    @IBOutlet weak var LightEstimationButton: UIButton!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var crosshair: UIView!
@@ -163,17 +164,57 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    @IBAction func didTapSelectLight(_ sender: Any) {
+        
+        guard let configuration = sceneView.session.configuration else { return }
+        
+        if configuration.isLightEstimationEnabled == true {
+            ResetSessionWithLight(chooseLight: false)
+        } else {
+            ResetSessionWithLight(chooseLight: true)
+        }
+        
+        
+    }
+    
     // MARK: - 初始化配置
     func runSession() {
+        guard ARWorldTrackingConfiguration.isSupported else {
+            messageLabel.text = "不支持 ARConfig: AR World Tracking"
+            messageLabel.textColor = UIColor.red
+            return
+        }
+        
         sceneView.delegate = self
         sceneView.showsStatistics = true
         
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = .horizontal
+        configuration.worldAlignment = .gravity
         configuration.isLightEstimationEnabled = true
+        LightEstimationButton.setTitle("🌞", for: UIControl.State.normal)
         sceneView.session.run(configuration)
         #if DEBUG
             sceneView.debugOptions = ARSCNDebugOptions.showFeaturePoints
+        #endif
+    }
+    
+    func ResetSessionWithLight(chooseLight isLight: Bool ) {
+        sceneView.delegate = self
+        sceneView.showsStatistics = true
+        
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = .horizontal
+        configuration.worldAlignment = .gravity
+        configuration.isLightEstimationEnabled = isLight
+        if isLight {
+            LightEstimationButton.setTitle("🌞", for: UIControl.State.normal)
+        } else {
+            LightEstimationButton.setTitle("🌛", for: UIControl.State.normal)
+        }
+        sceneView.session.run(configuration)
+        #if DEBUG
+        sceneView.debugOptions = ARSCNDebugOptions.showFeaturePoints
         #endif
     }
     
@@ -215,6 +256,7 @@ extension ViewController: ARSCNViewDelegate {
             
             if let planeAnchor = anchor as? ARPlaneAnchor {
                 self.messageLabel.text = "发现理想平面"
+                self.messageLabel.textColor = UIColor.green
                 #if DEBUG
                     let planeNode = createPlaneNode(center: planeAnchor.center, extent: planeAnchor.extent)
                     node.addChildNode(planeNode)
@@ -254,10 +296,12 @@ extension ViewController: ARSCNViewDelegate {
     
     func sessionWasInterrupted(_ session: ARSession) {
         messageLabel.text = "检测平面: Stop"
+        messageLabel.textColor = UIColor.red
     }
     
     func sessionInterruptionEnded(_ session: ARSession) {
         messageLabel.text = "检测平面: Resume"
+        messageLabel.textColor = UIColor.yellow
         resetTracking()
     }
     
@@ -271,18 +315,23 @@ extension ViewController: ARSCNViewDelegate {
         switch camera.trackingState {
         case .normal :
             messageLabel.text = "检测到一个不算很理想平面."
+            messageLabel.textColor = UIColor.yellow
             
         case .notAvailable:
             messageLabel.text = "检测平面不准确."
+            messageLabel.textColor = UIColor.yellow
             
         case .limited(.excessiveMotion):
             messageLabel.text = "Tracking limited - 设备移动的太慢了."
+            messageLabel.textColor = UIColor.yellow
             
         case .limited(.insufficientFeatures):
             messageLabel.text = "Tracking limited - 让设备处于可见状态."
+            messageLabel.textColor = UIColor.yellow
             
         case .limited(.initializing):
-            messageLabel.text = "正在初始化AR Session."
+            messageLabel.text = "正在初始化AR Session. 请稍等..."
+            messageLabel.textColor = UIColor.red
             
         default:
             messageLabel.text = ""

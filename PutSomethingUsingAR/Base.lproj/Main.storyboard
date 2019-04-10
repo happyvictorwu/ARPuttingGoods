@@ -88,12 +88,21 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Vg-1p-TTj" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
-                                <rect key="frame" x="182" y="788" width="50" height="60"/>
+                                <rect key="frame" x="172" y="786" width="70" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <state key="normal" title="✙"/>
                                 <connections>
                                     <action selector="didTapAddObject:" destination="BV1-FR-VrT" eventType="touchUpInside" id="gbs-CG-AGn"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEA-ms-9z0" userLabel="LightEstimation Button" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
+                                <rect key="frame" x="20" y="786" width="50" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="🌞"/>
+                                <connections>
+                                    <action selector="didTapSelectLight:" destination="BV1-FR-VrT" eventType="touchUpInside" id="ogM-VW-T3t"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -109,6 +118,7 @@
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                     </view>
                     <connections>
+                        <outlet property="LightEstimationButton" destination="mEA-ms-9z0" id="eYe-n8-XUD"/>
                         <outlet property="candleButton" destination="mgm-aC-ije" id="f2e-nd-7n5"/>
                         <outlet property="chairButton" destination="zQv-Ve-Vbq" id="9pL-P5-ltP"/>
                         <outlet property="crosshair" destination="SME-Sn-pDN" id="5Jn-YR-taT"/>
