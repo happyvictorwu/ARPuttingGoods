@@ -186,4 +186,41 @@ extension ViewController: ARSCNViewDelegate {
         guard anchor is ARPlaneAnchor else { return }
         removeChildren(inNode: node)
     }
+    
+    func sessionWasInterrupted(_ session: ARSession) {
+        messageLabel.text = "检测平面: Stop"
+    }
+    
+    func sessionInterruptionEnded(_ session: ARSession) {
+        messageLabel.text = "检测平面: Resume"
+        resetTracking()
+    }
+    
+    func resetTracking() {
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = .horizontal
+        sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+    }
+
+    func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
+        switch camera.trackingState {
+        case .normal :
+            messageLabel.text = "检测到一个可用平面."
+            
+        case .notAvailable:
+            messageLabel.text = "检测平面不准确."
+            
+        case .limited(.excessiveMotion):
+            messageLabel.text = "Tracking limited - 设备移动的太慢了."
+            
+        case .limited(.insufficientFeatures):
+            messageLabel.text = "Tracking limited - 让设备处于可见状态."
+            
+        case .limited(.initializing):
+            messageLabel.text = "正在初始化AR Session."
+            
+        default:
+            messageLabel.text = ""
+        }
+    }
 }
