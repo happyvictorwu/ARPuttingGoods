@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		720A7408225DCBE800DCA9D8 /* WorldTransformHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A7407225DCBE800DCA9D8 /* WorldTransformHelpers.swift */; };
 		72E7D8E9225C87F200C58C23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7D8E8225C87F200C58C23 /* AppDelegate.swift */; };
 		72E7D8ED225C87F200C58C23 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7D8EC225C87F200C58C23 /* ViewController.swift */; };
 		72E7D8F0225C87F200C58C23 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72E7D8EE225C87F200C58C23 /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		720A7407225DCBE800DCA9D8 /* WorldTransformHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTransformHelpers.swift; sourceTree = "<group>"; };
 		72E7D8E5225C87F200C58C23 /* PutSomethingUsingAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PutSomethingUsingAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72E7D8E8225C87F200C58C23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72E7D8EC225C87F200C58C23 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				72E7D8FE225C8BD400C58C23 /* SCNNodeHelpers.swift */,
 				72E7D902225C98C600C58C23 /* CustomButton.swift */,
 				72E7D904225CC45600C58C23 /* UIViewControllerUtils.swift */,
+				720A7407225DCBE800DCA9D8 /* WorldTransformHelpers.swift */,
 			);
 			path = PutSomethingUsingAR;
 			sourceTree = "<group>";
@@ -154,6 +157,7 @@
 				72E7D905225CC45600C58C23 /* UIViewControllerUtils.swift in Sources */,
 				72E7D8FF225C8BD400C58C23 /* SCNNodeHelpers.swift in Sources */,
 				72E7D8FD225C88DC00C58C23 /* SCNVector3Math.swift in Sources */,
+				720A7408225DCBE800DCA9D8 /* WorldTransformHelpers.swift in Sources */,
 				72E7D8ED225C87F200C58C23 /* ViewController.swift in Sources */,
 				72E7D8E9225C87F200C58C23 /* AppDelegate.swift in Sources */,
 				72E7D903225C98C600C58C23 /* CustomButton.swift in Sources */,

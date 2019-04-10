@@ -15,7 +15,7 @@ enum FunctionMode {
     case measure
 }
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
     // MARK: - 控件
     @IBOutlet var sceneView: ARSCNView!
@@ -24,12 +24,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var candleButton: CustomButton!
     @IBOutlet weak var measureButton: CustomButton!
     @IBOutlet weak var distanceLabel: UILabel!
-    @IBOutlet weak var trackingInfo: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var crosshair: UIView!
     
     // MARK: - 物体变量
     var currentMode: FunctionMode = .none
+    
+    var currentObject: SCNNode!   // 指向当前已经放置的物体
+    var currentAngleY: Float = 0.0  // 当前物体的角度偏移量
+    
     var objects: [SCNNode] = []
     var measuringNodes: [SCNNode] = []
     
@@ -38,11 +41,19 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         runSession()
-        trackingInfo.text = ""
         messageLabel.text = ""
         distanceLabel.isHidden = true
         selectVase()    // 默认先选择花瓶
-
+        
+        // 手势缩放
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(didPinch(_:)))
+        sceneView.addGestureRecognizer(pinchGesture)
+        
+        // 手势旋转
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))
+        panGesture.delegate = self
+        sceneView.addGestureRecognizer(panGesture)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,6 +71,60 @@ class ViewController: UIViewController {
         
         // Pause the view's session
         sceneView.session.pause()
+    }
+    
+    // MARK: - 手势缩放
+    @objc func didPinch(_ gesture: UIPinchGestureRecognizer) {
+        guard let _ = currentObject else { return }
+        
+        var originalScale = currentObject?.scale
+        
+        switch gesture.state {
+        case .began:
+            originalScale = currentObject?.scale
+            gesture.scale = CGFloat((currentObject?.scale.x)!)
+        case .changed:
+            guard var newScale = originalScale else { return }
+            
+            if gesture.scale < 0.5{
+                newScale = SCNVector3(x: 0.5, y: 0.5, z: 0.5)
+            }else if gesture.scale > 2{
+                newScale = SCNVector3(2, 2, 2)
+            }else{
+                newScale = SCNVector3(gesture.scale, gesture.scale, gesture.scale)
+            }
+            self.currentObject?.scale = newScale
+        case .ended:
+            guard var newScale = originalScale else { return }
+            
+            if gesture.scale < 0.5 {
+                newScale = SCNVector3(x: 0.5, y: 0.5, z: 0.5)
+            } else if gesture.scale > 2 {
+                newScale = SCNVector3(2, 2, 2)
+            }else{
+                newScale = SCNVector3(gesture.scale, gesture.scale, gesture.scale)
+            }
+            self.currentObject?.scale = newScale
+            gesture.scale = CGFloat((self.currentObject?.scale.x)!)
+            
+        default:
+            gesture.scale = 1.0
+            originalScale = nil
+        }
+    }
+    
+    // MARK: - 手势旋转
+    @objc func didPan(_ gesture: UIPanGestureRecognizer) {
+        guard let _ = currentObject else { return }
+        let translation = gesture.translation(in: gesture.view)
+        var newAngleY = (Float)(translation.x) * (Float)(Double.pi) / 180.0
+        
+        newAngleY += currentAngleY
+        currentObject?.eulerAngles.y = newAngleY
+        
+        if gesture.state == .ended {
+            currentAngleY = newAngleY
+        }
     }
     
     // MARK: - 点击事件
@@ -88,8 +153,7 @@ class ViewController: UIViewController {
         distanceLabel.text = ""
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+    @IBAction func didTapAddObject(_ sender: Any) {
         if let hit = sceneView.hitTest(viewCenter, types: [.existingPlaneUsingExtent]).first {
             sceneView.session.add(anchor: ARAnchor(transform: hit.worldTransform))
             return
@@ -150,6 +214,7 @@ extension ViewController: ARSCNViewDelegate {
         DispatchQueue.main.async {
             
             if let planeAnchor = anchor as? ARPlaneAnchor {
+                self.messageLabel.text = "发现理想平面"
                 #if DEBUG
                     let planeNode = createPlaneNode(center: planeAnchor.center, extent: planeAnchor.extent)
                     node.addChildNode(planeNode)
@@ -160,9 +225,9 @@ extension ViewController: ARSCNViewDelegate {
                     case .none:
                         break
                     case .placeObject(let name):
-                        let modelClone = SCNScene(named: name)!.rootNode.clone()
-                        self.objects.append(modelClone)
-                        node.addChildNode(modelClone)
+                        self.currentObject = SCNScene(named: name)!.rootNode.clone()
+                        self.objects.append(self.currentObject)
+                        node.addChildNode(self.currentObject)
                     case .measure:
                         break
                 }
@@ -205,7 +270,7 @@ extension ViewController: ARSCNViewDelegate {
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
         switch camera.trackingState {
         case .normal :
-            messageLabel.text = "检测到一个可用平面."
+            messageLabel.text = "检测到一个不算很理想平面."
             
         case .notAvailable:
             messageLabel.text = "检测平面不准确."

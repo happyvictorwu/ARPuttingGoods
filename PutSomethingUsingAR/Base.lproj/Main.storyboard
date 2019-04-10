@@ -72,13 +72,6 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TrackingInfo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1M-8e-0rU" userLabel="Tracking Info">
-                                <rect key="frame" x="174" y="800" width="95" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S3Q-wA-q4A" userLabel="Messages Label">
                                 <rect key="frame" x="20" y="56" width="374" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -94,6 +87,15 @@
                                     <constraint firstAttribute="width" constant="10" id="qiT-4n-iwF"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Vg-1p-TTj" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
+                                <rect key="frame" x="182" y="788" width="50" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="✙"/>
+                                <connections>
+                                    <action selector="didTapAddObject:" destination="BV1-FR-VrT" eventType="touchUpInside" id="gbs-CG-AGn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -114,7 +116,6 @@
                         <outlet property="measureButton" destination="cIA-c7-GhB" id="WW3-0s-bzs"/>
                         <outlet property="messageLabel" destination="S3Q-wA-q4A" id="oGh-Xm-UMk"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
-                        <outlet property="trackingInfo" destination="J1M-8e-0rU" id="oRb-1r-LGd"/>
                         <outlet property="vaseButton" destination="PAO-b2-HSs" id="amE-Ac-0Di"/>
                     </connections>
                 </viewController>
