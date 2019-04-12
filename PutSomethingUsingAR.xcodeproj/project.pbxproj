@@ -47,6 +47,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		72A96DF5226037D100E8359A /* ClassExtension */ = {
+			isa = PBXGroup;
+			children = (
+				72E7D8FC225C88DC00C58C23 /* SCNVector3Math.swift */,
+				72E7D904225CC45600C58C23 /* UIViewControllerUtils.swift */,
+			);
+			path = ClassExtension;
+			sourceTree = "<group>";
+		};
+		72A96DF62260380000E8359A /* CustomThings */ = {
+			isa = PBXGroup;
+			children = (
+				72E7D902225C98C600C58C23 /* CustomButton.swift */,
+			);
+			path = CustomThings;
+			sourceTree = "<group>";
+		};
+		72A96DF72260385200E8359A /* HelperMethod */ = {
+			isa = PBXGroup;
+			children = (
+				72E7D8FE225C8BD400C58C23 /* SCNNodeHelpers.swift */,
+				720A7407225DCBE800DCA9D8 /* WorldTransformHelpers.swift */,
+			);
+			path = HelperMethod;
+			sourceTree = "<group>";
+		};
 		72E7D8DC225C87F200C58C23 = {
 			isa = PBXGroup;
 			children = (
@@ -69,15 +95,13 @@
 				72E7D8E8225C87F200C58C23 /* AppDelegate.swift */,
 				72E7D8EC225C87F200C58C23 /* ViewController.swift */,
 				72E7D8EE225C87F200C58C23 /* Main.storyboard */,
+				72A96DF5226037D100E8359A /* ClassExtension */,
+				72A96DF72260385200E8359A /* HelperMethod */,
+				72A96DF62260380000E8359A /* CustomThings */,
 				72E7D8F1225C87F400C58C23 /* Assets.xcassets */,
 				72E7D900225C979200C58C23 /* Furniture.scnassets */,
 				72E7D8F3225C87F400C58C23 /* LaunchScreen.storyboard */,
 				72E7D8F6225C87F400C58C23 /* Info.plist */,
-				72E7D8FC225C88DC00C58C23 /* SCNVector3Math.swift */,
-				72E7D8FE225C8BD400C58C23 /* SCNNodeHelpers.swift */,
-				72E7D902225C98C600C58C23 /* CustomButton.swift */,
-				72E7D904225CC45600C58C23 /* UIViewControllerUtils.swift */,
-				720A7407225DCBE800DCA9D8 /* WorldTransformHelpers.swift */,
 			);
 			path = PutSomethingUsingAR;
 			sourceTree = "<group>";
