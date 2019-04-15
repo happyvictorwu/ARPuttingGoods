@@ -19,6 +19,8 @@ enum FunctionMode {
 
 class ViewController: UIViewController, UIGestureRecognizerDelegate {
 
+    fileprivate var loadPrevious = host_cpu_load_info()
+    
     // MARK: - 控件
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var vaseButton: CustomButton!
@@ -166,8 +168,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             debugPrint(response)
         }
         
-        var memoryInfo: ApplicationMemoryCurrentUsage = report_memory()
+        let memoryInfo: ApplicationMemoryCurrentUsage = report_memory()
         print(memoryInfo)
+        
+        print(cpuUsage())
         
     }
     
@@ -267,6 +271,27 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         
         objects = []
+    }
+    
+    //MARK: - CPU
+    public func cpuUsage() -> (system: Double, user: Double, idle : Double, nice: Double){
+        let load = hostCPULoadInfo();
+        
+        let usrDiff: Double = Double((load?.cpu_ticks.0)! - loadPrevious.cpu_ticks.0);
+        let systDiff = Double((load?.cpu_ticks.1)! - loadPrevious.cpu_ticks.1);
+        let idleDiff = Double((load?.cpu_ticks.2)! - loadPrevious.cpu_ticks.2);
+        let niceDiff = Double((load?.cpu_ticks.3)! - loadPrevious.cpu_ticks.3);
+        
+        let totalTicks = usrDiff + systDiff + idleDiff + niceDiff
+        print("Total ticks is ", totalTicks);
+        let sys = systDiff / totalTicks * 100.0
+        let usr = usrDiff / totalTicks * 100.0
+        let idle = idleDiff / totalTicks * 100.0
+        let nice = niceDiff / totalTicks * 100.0
+        
+        loadPrevious = load!
+        
+        return (sys, usr, idle, nice);
     }
 }
 
