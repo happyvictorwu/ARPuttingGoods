@@ -165,6 +165,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
             debugPrint(response)
         }
+        
+        var memoryInfo: ApplicationMemoryCurrentUsage = report_memory()
+        print(memoryInfo)
+        
     }
     
     @IBAction func didTapReset(_ sender: Any) {

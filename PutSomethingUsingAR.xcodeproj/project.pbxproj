@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		720A7408225DCBE800DCA9D8 /* WorldTransformHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A7407225DCBE800DCA9D8 /* WorldTransformHelpers.swift */; };
+		721AAF6222647A0D0051C145 /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721AAF6122647A0D0051C145 /* Memory.swift */; };
 		72E7D8E9225C87F200C58C23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7D8E8225C87F200C58C23 /* AppDelegate.swift */; };
 		72E7D8ED225C87F200C58C23 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7D8EC225C87F200C58C23 /* ViewController.swift */; };
 		72E7D8F0225C87F200C58C23 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72E7D8EE225C87F200C58C23 /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		13D88187F3326C484914E3A1 /* Pods-PutSomethingUsingAR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PutSomethingUsingAR.release.xcconfig"; path = "Target Support Files/Pods-PutSomethingUsingAR/Pods-PutSomethingUsingAR.release.xcconfig"; sourceTree = "<group>"; };
 		720A7407225DCBE800DCA9D8 /* WorldTransformHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTransformHelpers.swift; sourceTree = "<group>"; };
+		721AAF6122647A0D0051C145 /* Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
 		72E7D8E5225C87F200C58C23 /* PutSomethingUsingAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PutSomethingUsingAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72E7D8E8225C87F200C58C23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72E7D8EC225C87F200C58C23 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -58,8 +60,15 @@
 				8597D1B7ACD3B8E87EF6A15D /* Pods-PutSomethingUsingAR.debug.xcconfig */,
 				13D88187F3326C484914E3A1 /* Pods-PutSomethingUsingAR.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		721AAF60226479E50051C145 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				721AAF6122647A0D0051C145 /* Memory.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		72A96DF5226037D100E8359A /* ClassExtension */ = {
@@ -109,6 +118,7 @@
 		72E7D8E7225C87F200C58C23 /* PutSomethingUsingAR */ = {
 			isa = PBXGroup;
 			children = (
+				721AAF60226479E50051C145 /* Model */,
 				72E7D8E8225C87F200C58C23 /* AppDelegate.swift */,
 				72E7D8EC225C87F200C58C23 /* ViewController.swift */,
 				72E7D8EE225C87F200C58C23 /* Main.storyboard */,
@@ -254,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				721AAF6222647A0D0051C145 /* Memory.swift in Sources */,
 				72E7D905225CC45600C58C23 /* UIViewControllerUtils.swift in Sources */,
 				72E7D8FF225C8BD400C58C23 /* SCNNodeHelpers.swift in Sources */,
 				72E7D8FD225C88DC00C58C23 /* SCNVector3Math.swift in Sources */,
