@@ -8,6 +8,8 @@
 
 import UIKit
 import ARKit
+import Alamofire
+import SwiftyJSON
 
 enum FunctionMode {
     case none
@@ -147,6 +149,22 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func didTapMeasure(_ sender: Any) {
         currentMode = .measure
         selectButton(measureButton)
+        
+        let url: String = "http://222.201.145.166:8421/ARBuy/CpuInfo/receiveCpuInfo"
+        let parameters: Parameters = [
+            "appleId": "1233211234567",
+            "appVersion": "appVersion-test",
+            "deviceId": "deviceId-test",
+            "collectTime": "1554341709",
+            "cpuUsage": [
+                "cpuData": [1, 2, 3],
+                "timeData": [11, 22, 33]
+            ]
+        ]
+        
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+            debugPrint(response)
+        }
     }
     
     @IBAction func didTapReset(_ sender: Any) {
