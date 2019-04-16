@@ -152,11 +152,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         currentMode = .measure
         selectButton(measureButton)
         
-        let url: String = "http://222.201.145.166:8421/ARBuy/CpuInfo/receiveCpuInfo"
+        //let url: String = "http://125.216.242.152:8080/ArAnalysis/CpuInfo/receiveCpuInfo"
+        let url: String = "http://222.201.145.166:8421/ArAnalysis/CpuInfo/receiveCpuInfo"
         let parameters: Parameters = [
-            "appleId": "1233211234567",
-            "appVersion": "appVersion-test",
-            "deviceId": "deviceId-test",
+            "appId": "1233211234567",
+            "appVersion": "appVersion",
+            "deviceId": "dv",
             "collectTime": "1554341709",
             "cpuUsage": [
                 "cpuData": [1, 2, 3],
