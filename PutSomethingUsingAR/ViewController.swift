@@ -18,7 +18,7 @@ enum FunctionMode {
 }
 
 class ViewController: UIViewController, UIGestureRecognizerDelegate {
-
+    
     fileprivate var loadPrevious = host_cpu_load_info()
     
     // MARK: - 控件
@@ -49,15 +49,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         messageLabel.text = ""
         distanceLabel.isHidden = true
         selectVase()    // 默认先选择花瓶
+        GestureRecognizerInit() // 初始化手势
         
-        // 手势缩放
-        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(didPinch(_:)))
-        sceneView.addGestureRecognizer(pinchGesture)
-        
-        // 手势旋转
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))
-        panGesture.delegate = self
-        sceneView.addGestureRecognizer(panGesture)
+        // 收集CPU，内存占用
+        baseMobileInfo()
         
     }
     
@@ -78,7 +73,19 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         sceneView.session.pause()
     }
     
-    // MARK: - 手势缩放
+    // MARK: - 手势初始化
+    func GestureRecognizerInit() {
+        // 手势缩放
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(didPinch(_:)))
+        sceneView.addGestureRecognizer(pinchGesture)
+        
+        // 手势旋转
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))
+        panGesture.delegate = self
+        sceneView.addGestureRecognizer(panGesture)
+    }
+    
+    // 手势缩放
     @objc func didPinch(_ gesture: UIPinchGestureRecognizer) {
         guard let _ = currentObject else { return }
         
@@ -118,7 +125,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    // MARK: - 手势旋转
+    // 手势旋转
     @objc func didPan(_ gesture: UIPanGestureRecognizer) {
         guard let _ = currentObject else { return }
         let translation = gesture.translation(in: gesture.view)
@@ -151,23 +158,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func didTapMeasure(_ sender: Any) {
         currentMode = .measure
         selectButton(measureButton)
-        
-        //let url: String = "http://125.216.242.152:8080/ArAnalysis/CpuInfo/receiveCpuInfo"
-        let url: String = "http://222.201.145.166:8421/ArAnalysis/CpuInfo/receiveCpuInfo"
-        let parameters: Parameters = [
-            "appId": "1233211234567",
-            "appVersion": "appVersion",
-            "deviceId": "dv",
-            "collectTime": "1554341709",
-            "cpuUsage": [
-                "cpuData": [1, 2, 3],
-                "timeData": [11, 22, 33]
-            ]
-        ]
-        
-        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
-            debugPrint(response)
-        }
         
         let memoryInfo: ApplicationMemoryCurrentUsage = report_memory()
         print(memoryInfo)
@@ -273,27 +263,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         objects = []
     }
-    
-    //MARK: - CPU
-    public func cpuUsage() -> (system: Double, user: Double, idle : Double, nice: Double){
-        let load = hostCPULoadInfo();
-        
-        let usrDiff: Double = Double((load?.cpu_ticks.0)! - loadPrevious.cpu_ticks.0);
-        let systDiff = Double((load?.cpu_ticks.1)! - loadPrevious.cpu_ticks.1);
-        let idleDiff = Double((load?.cpu_ticks.2)! - loadPrevious.cpu_ticks.2);
-        let niceDiff = Double((load?.cpu_ticks.3)! - loadPrevious.cpu_ticks.3);
-        
-        let totalTicks = usrDiff + systDiff + idleDiff + niceDiff
-        print("Total ticks is ", totalTicks);
-        let sys = systDiff / totalTicks * 100.0
-        let usr = usrDiff / totalTicks * 100.0
-        let idle = idleDiff / totalTicks * 100.0
-        let nice = niceDiff / totalTicks * 100.0
-        
-        loadPrevious = load!
-        
-        return (sys, usr, idle, nice);
-    }
+
 }
 
 extension ViewController: ARSCNViewDelegate {
@@ -383,6 +353,49 @@ extension ViewController: ARSCNViewDelegate {
             
         default:
             messageLabel.text = ""
+        }
+    }
+}
+
+
+extension ViewController {
+    
+    //Get CPU
+    func cpuUsage() -> (system: Double, user: Double, idle : Double, nice: Double){
+        let load = hostCPULoadInfo();
+        
+        let usrDiff: Double = Double((load?.cpu_ticks.0)! - loadPrevious.cpu_ticks.0);
+        let systDiff = Double((load?.cpu_ticks.1)! - loadPrevious.cpu_ticks.1);
+        let idleDiff = Double((load?.cpu_ticks.2)! - loadPrevious.cpu_ticks.2);
+        let niceDiff = Double((load?.cpu_ticks.3)! - loadPrevious.cpu_ticks.3);
+        
+        let totalTicks = usrDiff + systDiff + idleDiff + niceDiff
+        print("Total ticks is ", totalTicks);
+        let sys = systDiff / totalTicks * 100.0
+        let usr = usrDiff / totalTicks * 100.0
+        let idle = idleDiff / totalTicks * 100.0
+        let nice = niceDiff / totalTicks * 100.0
+        
+        loadPrevious = load!
+        
+        return (sys, usr, idle, nice);
+    }
+    
+    func baseMobileInfo() {
+        let urlCPU: String = "http://222.201.145.166:8421/ArAnalysis/CpuInfo/receiveCpuInfo"
+        let parameters: Parameters = [
+            "appId": "1233211234567",
+            "appVersion": "appVersion",
+            "deviceId": "dv",
+            "collectTime": "1554341709",
+            "cpuUsage": [
+                "cpuData": [1, 2, 3],
+                "timeData": [11, 22, 33]
+            ]
+        ]
+        
+        Alamofire.request(urlCPU, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+            debugPrint(response)
         }
     }
 }
