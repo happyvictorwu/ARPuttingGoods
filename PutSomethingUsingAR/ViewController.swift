@@ -29,6 +29,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: - 信息采集
     var cpuList: CpuInfo = CpuInfo.init()   // cpu的信息
     var memoryList: MemoryInfo = MemoryInfo.init()  // 内存信息
+    var FurnitureList: [Furniture] = [Furniture.init()]   //物体所有信息
     
     // MARK: - 控件
     @IBOutlet var sceneView: ARSCNView!
