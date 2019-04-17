@@ -19,7 +19,7 @@ enum FunctionMode {
 
 class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
-    fileprivate var loadPrevious = host_cpu_load_info()
+    fileprivate var loadPrevious = host_cpu_load_info() // cpu需要使用
     
     // 初始化不变的信息
     let appId: String = "1233211234567"
@@ -47,6 +47,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var currentObject: SCNNode!   // 指向当前已经放置的物体
     var currentAngleY: Float = 0.0  // 当前物体的角度偏移量
+    var currentFurnitureInfo: Furniture = Furniture.init()
     
     var objects: [SCNNode] = []
     var measuringNodes: [SCNNode] = []
@@ -147,6 +148,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         if gesture.state == .ended {
             currentAngleY = newAngleY
         }
+        
     }
     
     // MARK: - 点击事件
@@ -182,6 +184,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func didTapAddObject(_ sender: Any) {
+        
         if let hit = sceneView.hitTest(viewCenter, types: [.existingPlaneUsingExtent]).first {
             sceneView.session.add(anchor: ARAnchor(transform: hit.worldTransform))
             return
