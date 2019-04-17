@@ -6,6 +6,12 @@
 //  Copyright © 2019 Victor Wu. All rights reserved.
 //
 import Foundation
+
+struct MemoryInfo {
+    var memoryData: [Double] = []
+    var timeData: [String] = []
+}
+
 struct ApplicationMemoryCurrentUsage {
     
     var usage : Double = 0.0

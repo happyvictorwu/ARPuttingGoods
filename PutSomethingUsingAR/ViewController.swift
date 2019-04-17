@@ -26,8 +26,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     let appVersion:String = "v1.0"
     let deviceId: String = "iOS"
     
-    
-    var cpuList: CpuInfo = CpuInfo.init()// cpu的信息
+    // MARK: - 信息采集
+    var cpuList: CpuInfo = CpuInfo.init()   // cpu的信息
+    var memoryList: MemoryInfo = MemoryInfo.init()  // 内存信息
     
     // MARK: - 控件
     @IBOutlet var sceneView: ARSCNView!
@@ -400,7 +401,7 @@ extension ViewController: UIApplicationDelegate {
     }
     
     func baseMobileInfo() {
-        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: Selector(("collectMobileInfo")), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: Selector(("collectMobileInfo")), userInfo: nil, repeats: true)
         
 //        let urlCPU: String = "http://222.201.145.166:8421/ArAnalysis/CpuInfo/receiveCpuInfo"
 //        let parameters: Parameters = [
@@ -420,10 +421,19 @@ extension ViewController: UIApplicationDelegate {
     }
     
     @objc func collectMobileInfo() {
-        let cpuUserRatio = cpuUsage().user
+        let cpuUserRatio:Double = cpuUsage().user
+        let memoryRatio: Double = report_memory().ratio
+        let time = calculateUnixTimestamp()
         
+        // CPU
         cpuList.cpuData.append(cpuUserRatio)
-        cpuList.timeData.append(calculateUnixTimestamp())
-        print(cpuList)
+        cpuList.timeData.append(time)
+        
+        // Memory
+        memoryList.memoryData.append(memoryRatio)
+        memoryList.timeData.append(time)
+        
+        print(cpuList.cpuData)
+        print(memoryList.memoryData)
     }
 }
