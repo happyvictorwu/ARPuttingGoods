@@ -8,6 +8,12 @@
 
 import Foundation
 
+struct CpuInfo {
+    let collectTime: String = ""
+    let cpuData: [Int] = []
+    let timeData: [Int] = []
+}
+
 func hostCPULoadInfo() -> host_cpu_load_info? {
     let HOST_CPU_LOAD_INFO_COUNT = MemoryLayout<host_cpu_load_info>.stride/MemoryLayout<integer_t>.stride
     var size = mach_msg_type_number_t(HOST_CPU_LOAD_INFO_COUNT)

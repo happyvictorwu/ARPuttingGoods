@@ -21,6 +21,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     fileprivate var loadPrevious = host_cpu_load_info()
     
+    let cpuList: [CpuInfo] = []     // cpu的信息
+    
     // MARK: - 控件
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var vaseButton: CustomButton!
@@ -358,7 +360,17 @@ extension ViewController: ARSCNViewDelegate {
 }
 
 
-extension ViewController {
+extension ViewController: UIApplicationDelegate {
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        print("background!")
+        print("background!")
+        print("background!")
+        print("background!")
+        print("background!")
+        print("background!")
+        baseMobileInfo()
+    }
     
     //Get CPU
     func cpuUsage() -> (system: Double, user: Double, idle : Double, nice: Double){
