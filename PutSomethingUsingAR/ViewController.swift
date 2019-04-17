@@ -21,7 +21,13 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     fileprivate var loadPrevious = host_cpu_load_info()
     
-    let cpuList: [CpuInfo] = []     // cpu的信息
+    // 初始化不变的信息
+    let appId: String = "1233211234567"
+    let appVersion:String = "v1.0"
+    let deviceId: String = "iOS"
+    
+    
+    var cpuList: CpuInfo = CpuInfo.init()// cpu的信息
     
     // MARK: - 控件
     @IBOutlet var sceneView: ARSCNView!
@@ -394,20 +400,30 @@ extension ViewController: UIApplicationDelegate {
     }
     
     func baseMobileInfo() {
-        let urlCPU: String = "http://222.201.145.166:8421/ArAnalysis/CpuInfo/receiveCpuInfo"
-        let parameters: Parameters = [
-            "appId": "1233211234567",
-            "appVersion": "appVersion",
-            "deviceId": "dv",
-            "collectTime": "1554341709",
-            "cpuUsage": [
-                "cpuData": [1, 2, 3],
-                "timeData": [11, 22, 33]
-            ]
-        ]
+        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: Selector(("collectMobileInfo")), userInfo: nil, repeats: true)
         
-        Alamofire.request(urlCPU, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
-            debugPrint(response)
-        }
+//        let urlCPU: String = "http://222.201.145.166:8421/ArAnalysis/CpuInfo/receiveCpuInfo"
+//        let parameters: Parameters = [
+//            "appId": "1233211234567",
+//            "appVersion": "appVersion",
+//            "deviceId": "dv",
+//            "collectTime": "1554341709",
+//            "cpuUsage": [
+//                "cpuData": [1, 2, 3],
+//                "timeData": [11, 22, 33]
+//            ]
+//        ]
+//
+//        Alamofire.request(urlCPU, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+//            debugPrint(response)
+//        }
+    }
+    
+    @objc func collectMobileInfo() {
+        let cpuUserRatio = cpuUsage().user
+        
+        cpuList.cpuData.append(cpuUserRatio)
+        cpuList.timeData.append(calculateUnixTimestamp())
+        print(cpuList)
     }
 }

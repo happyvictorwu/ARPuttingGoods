@@ -10,6 +10,7 @@
 		720A7408225DCBE800DCA9D8 /* WorldTransformHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A7407225DCBE800DCA9D8 /* WorldTransformHelpers.swift */; };
 		721AAF6222647A0D0051C145 /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721AAF6122647A0D0051C145 /* Memory.swift */; };
 		721AAF702264C0350051C145 /* CPUInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721AAF6F2264C0350051C145 /* CPUInfo.swift */; };
+		725EDA1C2266EF1B00193BEC /* UnixTimestampHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725EDA1B2266EF1B00193BEC /* UnixTimestampHelper.swift */; };
 		72E7D8E9225C87F200C58C23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7D8E8225C87F200C58C23 /* AppDelegate.swift */; };
 		72E7D8ED225C87F200C58C23 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7D8EC225C87F200C58C23 /* ViewController.swift */; };
 		72E7D8F0225C87F200C58C23 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72E7D8EE225C87F200C58C23 /* Main.storyboard */; };
@@ -28,6 +29,7 @@
 		720A7407225DCBE800DCA9D8 /* WorldTransformHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTransformHelpers.swift; sourceTree = "<group>"; };
 		721AAF6122647A0D0051C145 /* Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
 		721AAF6F2264C0350051C145 /* CPUInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPUInfo.swift; sourceTree = "<group>"; };
+		725EDA1B2266EF1B00193BEC /* UnixTimestampHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnixTimestampHelper.swift; sourceTree = "<group>"; };
 		72E7D8E5225C87F200C58C23 /* PutSomethingUsingAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PutSomethingUsingAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72E7D8E8225C87F200C58C23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72E7D8EC225C87F200C58C23 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			children = (
 				72E7D8FE225C8BD400C58C23 /* SCNNodeHelpers.swift */,
 				720A7407225DCBE800DCA9D8 /* WorldTransformHelpers.swift */,
+				725EDA1B2266EF1B00193BEC /* UnixTimestampHelper.swift */,
 			);
 			path = HelperMethod;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 			files = (
 				721AAF6222647A0D0051C145 /* Memory.swift in Sources */,
 				72E7D905225CC45600C58C23 /* UIViewControllerUtils.swift in Sources */,
+				725EDA1C2266EF1B00193BEC /* UnixTimestampHelper.swift in Sources */,
 				72E7D8FF225C8BD400C58C23 /* SCNNodeHelpers.swift in Sources */,
 				72E7D8FD225C88DC00C58C23 /* SCNVector3Math.swift in Sources */,
 				720A7408225DCBE800DCA9D8 /* WorldTransformHelpers.swift in Sources */,

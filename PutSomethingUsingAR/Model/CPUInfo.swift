@@ -9,9 +9,8 @@
 import Foundation
 
 struct CpuInfo {
-    let collectTime: String = ""
-    let cpuData: [Int] = []
-    let timeData: [Int] = []
+    var cpuData: [Double] = []
+    var timeData: [String] = []
 }
 
 func hostCPULoadInfo() -> host_cpu_load_info? {
