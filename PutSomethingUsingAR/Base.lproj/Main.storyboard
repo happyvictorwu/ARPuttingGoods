@@ -56,7 +56,7 @@
                                     <action selector="didTapMeasure:" destination="BV1-FR-VrT" eventType="touchUpInside" id="919-97-puS"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Hx-yH-RqB" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
+                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Hx-yH-RqB" userLabel="Reset Button" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
                                 <rect key="frame" x="20" y="538" width="50" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
@@ -87,7 +87,7 @@
                                     <constraint firstAttribute="width" constant="10" id="qiT-4n-iwF"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Vg-1p-TTj" userLabel="Add Button" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
+                            <button hidden="YES" opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Vg-1p-TTj" userLabel="Add Button" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
                                 <rect key="frame" x="172" y="779" width="70" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
@@ -136,6 +136,7 @@
                         <outlet property="distanceLabel" destination="IB7-SE-Nlr" id="fOL-3W-bKX"/>
                         <outlet property="measureButton" destination="cIA-c7-GhB" id="WW3-0s-bzs"/>
                         <outlet property="messageLabel" destination="S3Q-wA-q4A" id="oGh-Xm-UMk"/>
+                        <outlet property="resetButton" destination="5Hx-yH-RqB" id="ObM-jV-g0G"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
                         <outlet property="vaseButton" destination="PAO-b2-HSs" id="amE-Ac-0Di"/>
                     </connections>

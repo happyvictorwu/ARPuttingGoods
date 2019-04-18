@@ -30,7 +30,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var cpuList: CpuInfo = CpuInfo.init()   // cpu的信息
     var memoryList: MemoryInfo = MemoryInfo.init()  // 内存信息
     
-    var currentFurniture: Furniture!
+    var currentFurniture: Furniture!    // 当前模型信息
     
     // MARK: - 控件
     @IBOutlet var sceneView: ARSCNView!
@@ -41,6 +41,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var LightEstimationButton: UIButton!
+    @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var crosshair: UIView!
@@ -101,13 +102,13 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // 手势缩放
     @objc func didPinch(_ gesture: UIPinchGestureRecognizer) {
-        guard let _ = currentObject else { return }
+        
+        guard let _ = currentObject, !confirmButton.isHidden else { return }
         
         var originalScale = currentObject?.scale
         
         switch gesture.state {
         case .began:
-            originalScale = currentObject?.scale
             gesture.scale = CGFloat((currentObject?.scale.x)!)
         case .changed:
             guard var newScale = originalScale else { return }
@@ -133,11 +134,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             self.currentObject?.scale = newScale
             gesture.scale = CGFloat((self.currentObject?.scale.x)!)
             
-            if originalScale!.x < Float(gesture.scale) {
-                print("Enlarge")
-            } else {
-                print("Shrink")
-            }
+            
             
         default:
             gesture.scale = 1.0
@@ -147,7 +144,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // 手势旋转
     @objc func didPan(_ gesture: UIPanGestureRecognizer) {
-        guard let _ = currentObject else { return }
+        guard let _ = currentObject, !confirmButton.isHidden else { return }
         let translation = gesture.translation(in: gesture.view)
         var newAngleY = (Float)(translation.x) * (Float)(Double.pi) / 180.0
         
@@ -158,7 +155,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             currentAngleY = newAngleY
             
             currentFurniture.actionInteractList.append(Action.Rotate)
-            print(currentFurniture.modelName + " is Rotate")
+            print(currentFurniture.modelName + " is Action-Rotate")
         }
     }
     
@@ -181,11 +178,14 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func didTapReset(_ sender: Any) {
         removeAllObjects()
         distanceLabel.text = ""
+        
+        //TODO: - add Remove Action to server
     }
     
     @IBAction func didTapAddObject(_ sender: Any) {
         
         addButton.isHidden = true
+        resetButton.isHidden = true
         confirmButton.isHidden = false
         
         currentFurniture = Furniture()
@@ -206,6 +206,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func didTapConfirm(_ sender: Any) {
         
         confirmButton.isHidden = true
+        resetButton.isHidden = false
         addButton.isHidden = false
         
         // upload confirmFurniture info to server
@@ -326,7 +327,7 @@ extension ViewController: ARSCNViewDelegate {
                         self.currentObject = SCNScene(named: name)!.rootNode.clone()
                         self.objects.append(self.currentObject)
                         self.currentFurniture.modelName = ObjectName
-                        print("a new furniture has Model name call: " + self.currentFurniture.modelName)
+                        print("a new furniture has Model Name call: " + self.currentFurniture.modelName)
                         node.addChildNode(self.currentObject)
                     case .measure:
                         break
@@ -374,10 +375,12 @@ extension ViewController: ARSCNViewDelegate {
         case .normal :
             messageLabel.text = "检测到一个不算很理想平面."
             messageLabel.textColor = UIColor.yellow
+            addButton.isHidden = false
             
         case .notAvailable:
             messageLabel.text = "检测平面不准确."
             messageLabel.textColor = UIColor.yellow
+            addButton.isHidden = true
             
         case .limited(.excessiveMotion):
             messageLabel.text = "Tracking limited - 设备移动的太慢了."
@@ -390,9 +393,11 @@ extension ViewController: ARSCNViewDelegate {
         case .limited(.initializing):
             messageLabel.text = "正在初始化AR Session. 请稍等..."
             messageLabel.textColor = UIColor.red
+            addButton.isHidden = true
             
         default:
             messageLabel.text = ""
+            addButton.isHidden = true
         }
     }
 }
