@@ -26,4 +26,16 @@ struct Furniture {
     var modelName: String = "unknow"
     var actionInteractList: [Action] = []
     var costTime: Double = 0
+    var isAdd: Bool = false
+    
+    mutating func resetItself() {
+        modelName = "unknow"
+        actionInteractList.removeAll()
+        costTime = 0
+        isAdd = false
+    }
 }
+//
+//struct FurnituresInfo {
+//    var FurnitureData: []
+//}

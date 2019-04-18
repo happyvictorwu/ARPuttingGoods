@@ -13,7 +13,7 @@ import SwiftyJSON
 
 enum FunctionMode {
     case none
-    case placeObject(String)
+    case placeObject(String, String)
     case measure
 }
 
@@ -29,7 +29,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: - 信息采集
     var cpuList: CpuInfo = CpuInfo.init()   // cpu的信息
     var memoryList: MemoryInfo = MemoryInfo.init()  // 内存信息
-    var FurnitureList: [Furniture] = [Furniture.init()]   //物体所有信息
+    var FurnitureList: [Furniture] = []   //物体所有信息
     
     // MARK: - 控件
     @IBOutlet var sceneView: ARSCNView!
@@ -37,6 +37,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var chairButton: CustomButton!
     @IBOutlet weak var candleButton: CustomButton!
     @IBOutlet weak var measureButton: CustomButton!
+    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var LightEstimationButton: UIButton!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
@@ -45,9 +47,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: - 物体变量
     var currentMode: FunctionMode = .none
     
+    
     var currentObject: SCNNode!   // 指向当前已经放置的物体
     var currentAngleY: Float = 0.0  // 当前物体的角度偏移量
-    var currentFurnitureInfo: Furniture = Furniture.init()
+    var currentFurniture: Furniture = Furniture()
     
     var objects: [SCNNode] = []
     var measuringNodes: [SCNNode] = []
@@ -130,6 +133,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             self.currentObject?.scale = newScale
             gesture.scale = CGFloat((self.currentObject?.scale.x)!)
             
+            if originalScale!.x < Float(gesture.scale) {
+                print("Enlarge")
+            } else {
+                print("Shrink")
+            }
+            
         default:
             gesture.scale = 1.0
             originalScale = nil
@@ -147,8 +156,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         if gesture.state == .ended {
             currentAngleY = newAngleY
+            
+            currentFurniture.actionInteractList.append(Action.Rotate)
+            print(currentFurniture.modelName + " is Rotate")
         }
-        
     }
     
     // MARK: - 点击事件
@@ -157,33 +168,28 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func didTapChair(_ sender: Any) {
-        currentMode = .placeObject("Furniture.scnassets/chair/chair.scn")
+        currentMode = .placeObject("Furniture.scnassets/chair/chair.scn", "Chair")
         selectButton(chairButton)
     }
     
     
     @IBAction func didTapCandle(_ sender: Any) {
-        currentMode = .placeObject("Furniture.scnassets/candle/candle.scn")
+        currentMode = .placeObject("Furniture.scnassets/candle/candle.scn", "Candle")
         selectButton(candleButton)
-    }
-    
-    @IBAction func didTapMeasure(_ sender: Any) {
-        currentMode = .measure
-        selectButton(measureButton)
-        
-        let memoryInfo: ApplicationMemoryCurrentUsage = report_memory()
-        print(memoryInfo)
-        
-        print(cpuUsage())
-        
     }
     
     @IBAction func didTapReset(_ sender: Any) {
         removeAllObjects()
+        for var furniture in FurnitureList {
+            furniture.actionInteractList.append(Action.Remove)
+        }
         distanceLabel.text = ""
     }
     
     @IBAction func didTapAddObject(_ sender: Any) {
+        
+        addButton.isHidden = true
+        confirmButton.isHidden = false
         
         if let hit = sceneView.hitTest(viewCenter, types: [.existingPlaneUsingExtent]).first {
             sceneView.session.add(anchor: ARAnchor(transform: hit.worldTransform))
@@ -192,6 +198,16 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             sceneView.session.add(anchor: ARAnchor(transform: hit.worldTransform))
             return
         }
+    }
+    
+
+    @IBAction func didTapConfirm(_ sender: Any) {
+        
+        confirmButton.isHidden = true
+        addButton.isHidden = false
+        
+        // upload info to server
+   
     }
     
     @IBAction func didTapSelectLight(_ sender: Any) {
@@ -204,6 +220,16 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             ResetSessionWithLight(chooseLight: true)
         }
         
+        
+    }
+    
+    @IBAction func didTapMeasure(_ sender: Any) {
+        currentMode = .measure
+        selectButton(measureButton)
+
+        for f in FurnitureList {
+            print(f)
+        }
         
     }
     
@@ -251,7 +277,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: - 选择物品
     
     func selectVase() {
-        currentMode = .placeObject("Furniture.scnassets/vase/vase.scn")
+        currentMode = .placeObject("Furniture.scnassets/vase/vase.scn", "Vase")
         selectButton(vaseButton)
     }
     
@@ -297,9 +323,10 @@ extension ViewController: ARSCNViewDelegate {
                 switch self.currentMode {
                     case .none:
                         break
-                    case .placeObject(let name):
+                    case .placeObject(let name, let ObjectName):
                         self.currentObject = SCNScene(named: name)!.rootNode.clone()
                         self.objects.append(self.currentObject)
+                        self.currentFurniture.modelName = ObjectName
                         node.addChildNode(self.currentObject)
                     case .measure:
                         break

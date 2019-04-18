@@ -20,7 +20,7 @@
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BrB-h1-WRS">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                             </arscnView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAO-b2-HSs" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
+                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PAO-b2-HSs" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
                                 <rect key="frame" x="20" y="157" width="50" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
@@ -29,7 +29,7 @@
                                     <action selector="didTapVase:" destination="BV1-FR-VrT" eventType="touchUpInside" id="4Fw-c2-Bba"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQv-Ve-Vbq" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
+                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQv-Ve-Vbq" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
                                 <rect key="frame" x="20" y="256" width="50" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
@@ -38,7 +38,7 @@
                                     <action selector="didTapChair:" destination="BV1-FR-VrT" eventType="touchUpInside" id="2vf-PL-CVF"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mgm-aC-ije" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
+                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mgm-aC-ije" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
                                 <rect key="frame" x="20" y="354" width="50" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
@@ -47,7 +47,7 @@
                                     <action selector="didTapCandle:" destination="BV1-FR-VrT" eventType="touchUpInside" id="uJW-SY-OjB"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cIA-c7-GhB" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
+                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cIA-c7-GhB" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
                                 <rect key="frame" x="20" y="437" width="50" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
@@ -56,7 +56,7 @@
                                     <action selector="didTapMeasure:" destination="BV1-FR-VrT" eventType="touchUpInside" id="919-97-puS"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Hx-yH-RqB" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
+                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Hx-yH-RqB" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
                                 <rect key="frame" x="20" y="538" width="50" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
@@ -87,8 +87,8 @@
                                     <constraint firstAttribute="width" constant="10" id="qiT-4n-iwF"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Vg-1p-TTj" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
-                                <rect key="frame" x="172" y="786" width="70" height="60"/>
+                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Vg-1p-TTj" userLabel="Add Button" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
+                                <rect key="frame" x="172" y="779" width="70" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <state key="normal" title="✙"/>
@@ -96,8 +96,17 @@
                                     <action selector="didTapAddObject:" destination="BV1-FR-VrT" eventType="touchUpInside" id="gbs-CG-AGn"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SRe-jV-nPp" userLabel="Confirm Button" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
+                                <rect key="frame" x="324" y="774" width="70" height="72"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <state key="normal" title="✔︎"/>
+                                <connections>
+                                    <action selector="didTapConfirm:" destination="BV1-FR-VrT" eventType="touchUpInside" id="HAG-x7-tvJ"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEA-ms-9z0" userLabel="LightEstimation Button" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
-                                <rect key="frame" x="20" y="786" width="50" height="60"/>
+                                <rect key="frame" x="20" y="780" width="50" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="🌞"/>
@@ -119,8 +128,10 @@
                     </view>
                     <connections>
                         <outlet property="LightEstimationButton" destination="mEA-ms-9z0" id="eYe-n8-XUD"/>
+                        <outlet property="addButton" destination="2Vg-1p-TTj" id="I7G-1g-kEG"/>
                         <outlet property="candleButton" destination="mgm-aC-ije" id="f2e-nd-7n5"/>
                         <outlet property="chairButton" destination="zQv-Ve-Vbq" id="9pL-P5-ltP"/>
+                        <outlet property="confirmButton" destination="SRe-jV-nPp" id="HEy-PQ-mAt"/>
                         <outlet property="crosshair" destination="SME-Sn-pDN" id="5Jn-YR-taT"/>
                         <outlet property="distanceLabel" destination="IB7-SE-Nlr" id="fOL-3W-bKX"/>
                         <outlet property="measureButton" destination="cIA-c7-GhB" id="WW3-0s-bzs"/>
