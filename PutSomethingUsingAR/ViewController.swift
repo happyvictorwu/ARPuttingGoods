@@ -29,7 +29,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: - 信息采集
     var cpuList: CpuInfo = CpuInfo.init()   // cpu的信息
     var memoryList: MemoryInfo = MemoryInfo.init()  // 内存信息
-    var FurnitureList: [Furniture] = []   //物体所有信息
+    
+    var currentFurniture: Furniture!
     
     // MARK: - 控件
     @IBOutlet var sceneView: ARSCNView!
@@ -50,7 +51,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var currentObject: SCNNode!   // 指向当前已经放置的物体
     var currentAngleY: Float = 0.0  // 当前物体的角度偏移量
-    var currentFurniture: Furniture = Furniture()
     
     var objects: [SCNNode] = []
     var measuringNodes: [SCNNode] = []
@@ -180,9 +180,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBAction func didTapReset(_ sender: Any) {
         removeAllObjects()
-        for var furniture in FurnitureList {
-            furniture.actionInteractList.append(Action.Remove)
-        }
         distanceLabel.text = ""
     }
     
@@ -190,6 +187,11 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         addButton.isHidden = true
         confirmButton.isHidden = false
+        
+        currentFurniture = Furniture()
+        print("create a new furniture")
+        currentFurniture.actionInteractList.append(Action.Add)
+        print("a new furniture create a Action-Add")
         
         if let hit = sceneView.hitTest(viewCenter, types: [.existingPlaneUsingExtent]).first {
             sceneView.session.add(anchor: ARAnchor(transform: hit.worldTransform))
@@ -206,7 +208,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         confirmButton.isHidden = true
         addButton.isHidden = false
         
-        // upload info to server
+        // upload confirmFurniture info to server
+        print("upload to serve")
    
     }
     
@@ -226,10 +229,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func didTapMeasure(_ sender: Any) {
         currentMode = .measure
         selectButton(measureButton)
-
-        for f in FurnitureList {
-            print(f)
-        }
         
     }
     
@@ -327,6 +326,7 @@ extension ViewController: ARSCNViewDelegate {
                         self.currentObject = SCNScene(named: name)!.rootNode.clone()
                         self.objects.append(self.currentObject)
                         self.currentFurniture.modelName = ObjectName
+                        print("a new furniture has Model name call: " + self.currentFurniture.modelName)
                         node.addChildNode(self.currentObject)
                     case .measure:
                         break
