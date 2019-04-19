@@ -10,7 +10,7 @@ import Foundation
 
 enum Action {
     case Scaling, Rotate, Add, Remove
-
+    
     var description: String {
         switch self {
         case .Scaling: return "Scaling"
@@ -32,7 +32,3 @@ struct Furniture {
         costTime = 0
     }
 }
-//
-//struct FurnituresInfo {
-//    var FurnitureData: []
-//}

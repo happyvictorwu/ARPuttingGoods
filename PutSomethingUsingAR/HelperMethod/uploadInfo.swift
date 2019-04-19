@@ -29,7 +29,7 @@ func uploadCPU(cpu: CpuInfo, urlTail: String) {
             "timeData": cpu.timeData
         ]
     ]
-
+    
     Alamofire.request(urlCPU, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
         debugPrint(response)
     }

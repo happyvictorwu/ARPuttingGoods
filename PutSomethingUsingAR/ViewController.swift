@@ -73,7 +73,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
-
+        
         // Run the view's session
         sceneView.session.run(configuration)
     }
@@ -201,7 +201,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-
+    
     @IBAction func didTapConfirm(_ sender: Any) {
         
         confirmButton.isHidden = true
@@ -225,7 +225,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         uploadGazeObject(furniture: self.currentFurniture, urlTail: "ArAnalysis/InteractInfo/receiveGazeObject")
         
         uploadInteractionLostInfo(furniture: self.currentFurniture, urlTail: "ArAnalysis/InteractInfo/receiveInteractListInfo")
-   
+        
     }
     
     @IBAction func didTapSelectLight(_ sender: Any) {
@@ -265,7 +265,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         LightEstimationButton.setTitle("🌞", for: UIControl.State.normal)
         sceneView.session.run(configuration)
         #if DEBUG
-            sceneView.debugOptions = ARSCNDebugOptions.showFeaturePoints
+        sceneView.debugOptions = ARSCNDebugOptions.showFeaturePoints
         #endif
     }
     
@@ -316,7 +316,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         objects = []
     }
-
+    
 }
 
 extension ViewController: ARSCNViewDelegate {
@@ -329,24 +329,24 @@ extension ViewController: ARSCNViewDelegate {
                 self.messageLabel.text = "发现理想平面"
                 self.messageLabel.textColor = UIColor.green
                 #if DEBUG
-                    let planeNode = createPlaneNode(center: planeAnchor.center, extent: planeAnchor.extent)
-                    node.addChildNode(planeNode)
+                let planeNode = createPlaneNode(center: planeAnchor.center, extent: planeAnchor.extent)
+                node.addChildNode(planeNode)
                 #endif
             } else {
                 
                 switch self.currentMode {
-                    case .none:
-                        break
-                    case .placeObject(let name, let ObjectName):
-                        self.currentObject = SCNScene(named: name)!.rootNode.clone()
-                        self.objects.append(self.currentObject)
-                        self.currentFurniture.modelName = ObjectName
-                        print("a new furniture has Model Name call: " + self.currentFurniture.modelName)
-                        node.addChildNode(self.currentObject)
-                    case .measure:
-                        break
+                case .none:
+                    break
+                case .placeObject(let name, let ObjectName):
+                    self.currentObject = SCNScene(named: name)!.rootNode.clone()
+                    self.objects.append(self.currentObject)
+                    self.currentFurniture.modelName = ObjectName
+                    print("a new furniture has Model Name call: " + self.currentFurniture.modelName)
+                    node.addChildNode(self.currentObject)
+                case .measure:
+                    break
                 }
-                    
+                
             }
             
         }
@@ -383,7 +383,7 @@ extension ViewController: ARSCNViewDelegate {
         configuration.planeDetection = .horizontal
         sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
     }
-
+    
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
         switch camera.trackingState {
         case .normal :
