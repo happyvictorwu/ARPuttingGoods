@@ -9,14 +9,13 @@
 import Foundation
 
 enum Action {
-    case Scaling, Rotate, Add, Remove
+    case Scaling, Rotate, Add
     
     var description: String {
         switch self {
-        case .Scaling: return "Scaling"
-        case .Rotate: return "Rotate"
-        case .Add: return "Add"
-        case .Remove: return "Remove"
+        case .Scaling: return "缩放(Scaling)"
+        case .Rotate: return "旋转(Rotate)"
+        case .Add: return "放置(Add)"
         }
     }
 }

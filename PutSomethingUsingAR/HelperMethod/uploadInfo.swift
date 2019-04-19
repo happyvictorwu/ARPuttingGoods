@@ -7,7 +7,6 @@
 //
 
 import Alamofire
-import SwiftyJSON
 
 let appId: String = "1233211234567"
 let appVersion:String = "v1.0"
@@ -109,24 +108,39 @@ func uploadGazeObject(furniture: Furniture, urlTail: String) {
 func uploadInteractionLostInfo(furniture: Furniture, urlTail: String) {
     let urlInteraction = urlServer + urlTail
     let modelName: String = furniture.modelName
-    var furnitureToString: [String] = []
+//    var furnitureToString: [String] = []
     
     for item in furniture.actionInteractList {
-        furnitureToString.append(item.description)
-    }
-    
-    let parameters: Parameters = [
-        "appId": appId,
-        "appVersion": appVersion,
-        "deviceId": deviceId,
-        "info": [
-            modelName: furnitureToString
+//        furnitureToString.append(item.description)
+        let action: String = item.description
+        
+        let parameters: Parameters = [
+            "appId": appId,
+            "appVersion": appVersion,
+            "deviceId": deviceId,
+            "interactList": [
+                ["model": modelName, "method": action],
+            ]
         ]
-    ]
-    
-    Alamofire.request(urlInteraction, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
-        debugPrint(response)
+        
+        Alamofire.request(urlInteraction, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+            debugPrint(response)
+        }
     }
+    
+//    let parameters: Parameters = [
+//        "appId": appId,
+//        "appVersion": appVersion,
+//        "deviceId": deviceId,
+//        "info": [
+//            modelName: furnitureToString[0]
+//        ]
+//    ]
+//
+//    Alamofire.request(urlInteraction, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+//        debugPrint(response)
+//    }
+    
 }
 
 // MARK: - Helpper

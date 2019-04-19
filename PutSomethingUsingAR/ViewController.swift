@@ -9,7 +9,6 @@
 import UIKit
 import ARKit
 import Alamofire
-import SwiftyJSON
 
 enum FunctionMode {
     case none
@@ -215,7 +214,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         print(cpuList)
         self.cpuList.resetAll()
         
-        uploadMemory(memory: memoryList, urlTail: "ArAnalysis/MemoryInfo/receivceMemoryInfo")
+        uploadMemory(memory: memoryList, urlTail: "ArAnalysis/MemoryInfo/receiveMemoryInfo")
         print(memoryList)
         self.memoryList.resetAll()
         
@@ -244,6 +243,23 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func didTapMeasure(_ sender: Any) {
         currentMode = .measure
         selectButton(measureButton)
+        
+        let parameters: Parameters = [
+            "appId": "appId-test",
+            "appVersion": "appVersion-test",
+            "deviceId": "deviceId-test",
+            "collectTime":"1554341709",
+            "runtimeMemory": [
+                "memoryData":[1,2,3,4,5,6,7,8,9,10],
+                "timeData":[1,2,3,4,5,6,7,8,9,10]
+            ]
+
+
+        ]
+        Alamofire.request("http://222.201.145.166:8421/ArAnalysis/MemoryInfo/receiveMemoryInfo", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+            debugPrint(response)
+        }
+        print("memory uploaded")
         
     }
     
