@@ -21,11 +21,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     fileprivate var loadPrevious = host_cpu_load_info() // cpu需要使用
     
-    // 初始化不变的信息
-    let appId: String = "1233211234567"
-    let appVersion:String = "v1.0"
-    let deviceId: String = "iOS"
-    
     // MARK: - 信息采集
     var cpuList: CpuInfo = CpuInfo.init()   // cpu的信息
     var memoryList: MemoryInfo = MemoryInfo.init()  // 内存信息
@@ -113,9 +108,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         case .changed:
             guard var newScale = originalScale else { return }
             
-            if gesture.scale < 0.5{
+            if gesture.scale < 0.5{ // 0.5倍
                 newScale = SCNVector3(x: 0.5, y: 0.5, z: 0.5)
-            }else if gesture.scale > 2{
+            }else if gesture.scale > 2{ // 2倍
                 newScale = SCNVector3(2, 2, 2)
             }else{
                 newScale = SCNVector3(gesture.scale, gesture.scale, gesture.scale)
@@ -131,6 +126,21 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }else{
                 newScale = SCNVector3(gesture.scale, gesture.scale, gesture.scale)
             }
+            // FIXME: Bug
+            if gesture.scale < 0.5 {
+                print("Action-Shrink 0.5")
+            } else if gesture.scale > 2 {
+                print("Action-Enlarge 2")
+            } else {    // gesture.scale >= 0.5 && gesture.scale <= 2
+                if CGFloat(newScale.x) > gesture.scale {
+                    print("Action-Enlarge")
+                } else if CGFloat(newScale.x) < gesture.scale {
+                    print("Action-Shrink")
+                } else {
+                    print("Action-No change");
+                }
+            }
+            
             self.currentObject?.scale = newScale
             gesture.scale = CGFloat((self.currentObject?.scale.x)!)
             
@@ -178,8 +188,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func didTapReset(_ sender: Any) {
         removeAllObjects()
         distanceLabel.text = ""
-        
-        //TODO: - add Remove Action to server
     }
     
     @IBAction func didTapAddObject(_ sender: Any) {
@@ -209,8 +217,19 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         resetButton.isHidden = false
         addButton.isHidden = false
         
-        // upload confirmFurniture info to server
+        // FIXME: upload confirmFurniture info to server
         print("upload to serve")
+
+        
+        uploadCPU(cpu: cpuList, urlTail: "ArAnalysis/CpuInfo/receiveCpuInfo")
+        print(cpuList)
+        cpuList.resetAll()
+        uploadMemory(memory: memoryList, urlTail: "ArAnalysis/MemoryInfo/receivceMemoryInfo")
+        print(memoryList)
+        memoryList.resetAll()
+        uploadTriggerCount(furniture: currentFurniture.actionInteractList, urlTail: "ArAnalysis/InteractInfo/receiveTrigger")
+        
+        
    
     }
     
@@ -403,17 +422,7 @@ extension ViewController: ARSCNViewDelegate {
 }
 
 
-extension ViewController: UIApplicationDelegate {
-    
-    func applicationWillTerminate(_ application: UIApplication) {
-        print("background!")
-        print("background!")
-        print("background!")
-        print("background!")
-        print("background!")
-        print("background!")
-        baseMobileInfo()
-    }
+extension ViewController {
     
     //Get CPU
     func cpuUsage() -> (system: Double, user: Double, idle : Double, nice: Double){
@@ -437,23 +446,7 @@ extension ViewController: UIApplicationDelegate {
     }
     
     func baseMobileInfo() {
-        Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: Selector(("collectMobileInfo")), userInfo: nil, repeats: true)
-        
-//        let urlCPU: String = "http://222.201.145.166:8421/ArAnalysis/CpuInfo/receiveCpuInfo"
-//        let parameters: Parameters = [
-//            "appId": "1233211234567",
-//            "appVersion": "appVersion",
-//            "deviceId": "dv",
-//            "collectTime": "1554341709",
-//            "cpuUsage": [
-//                "cpuData": [1, 2, 3],
-//                "timeData": [11, 22, 33]
-//            ]
-//        ]
-//
-//        Alamofire.request(urlCPU, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
-//            debugPrint(response)
-//        }
+        Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: Selector(("collectMobileInfo")), userInfo: nil, repeats: true)
     }
     
     @objc func collectMobileInfo() {
@@ -468,8 +461,5 @@ extension ViewController: UIApplicationDelegate {
         // Memory
         memoryList.memoryData.append(memoryRatio)
         memoryList.timeData.append(time)
-        
-        print(cpuList.cpuData)
-        print(memoryList.memoryData)
     }
 }

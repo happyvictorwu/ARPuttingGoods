@@ -10,6 +10,17 @@ import Foundation
 struct MemoryInfo {
     var memoryData: [Double] = []
     var timeData: [String] = []
+    
+    func isEmpty() -> Bool {
+        guard memoryData.count == timeData.count else { print("check memoryData no equial to timeData.count"); return true}
+        return memoryData.isEmpty
+    }
+    
+    mutating func resetAll() {
+        self.memoryData.removeAll()
+        self.timeData.removeAll()
+    }
+    
 }
 
 struct ApplicationMemoryCurrentUsage {
@@ -43,8 +54,7 @@ func report_memory()->ApplicationMemoryCurrentUsage {
         let total = ProcessInfo.processInfo.physicalMemory / (1024 * 1024)
         let ratio = Double(info.virtual_size) / Double(ProcessInfo.processInfo.physicalMemory)
         return ApplicationMemoryCurrentUsage(usage: Double(usage), total: Double(total), ratio: Double(ratio))
-    }
-    else {
+    } else {
         print("Error with task_info(): " +
             (String(cString: mach_error_string(kerr), encoding: String.Encoding.ascii) ?? "unknown error"))
         return ApplicationMemoryCurrentUsage()

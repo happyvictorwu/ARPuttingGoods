@@ -11,6 +11,16 @@ import Foundation
 struct CpuInfo {
     var cpuData: [Double] = []
     var timeData: [String] = []
+    
+    func isEmpty() -> Bool {
+        guard cpuData.count == timeData.count else { print("check cpuData.count(\(cpuData.count)) no equial to timeData.count(\(timeData.count))"); return true}
+        return cpuData.isEmpty
+    }
+    
+    mutating func resetAll() {
+        self.cpuData.removeAll()
+        self.timeData.removeAll()
+    }
 }
 
 func hostCPULoadInfo() -> host_cpu_load_info? {

@@ -10,7 +10,7 @@ import Foundation
 
 enum Action {
     case Enlarge, Shrink, Rotate, Add, Remove
-    
+
     var description: String {
         switch self {
         case .Enlarge: return "Enlarge"
@@ -25,14 +25,12 @@ enum Action {
 struct Furniture {
     var modelName: String = "unknow"
     var actionInteractList: [Action] = []
-    var costTime: Double = 0
-    var isAdd: Bool = false
+    var costTime: Int = 0
     
     mutating func resetItself() {
         modelName = "unknow"
         actionInteractList.removeAll()
         costTime = 0
-        isAdd = false
     }
 }
 //
