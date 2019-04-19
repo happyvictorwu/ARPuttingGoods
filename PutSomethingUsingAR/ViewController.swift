@@ -22,10 +22,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     fileprivate var loadPrevious = host_cpu_load_info() // cpu需要使用
     
     // MARK: - 信息采集
+    let timeInterval: Int = 2  // 信息采集时间间隔
     var cpuList: CpuInfo = CpuInfo.init()   // cpu的信息
     var memoryList: MemoryInfo = MemoryInfo.init()  // 内存信息
     
     var currentFurniture: Furniture!    // 当前模型信息
+    var currentTime: Int = 0
     
     // MARK: - 控件
     @IBOutlet var sceneView: ARSCNView!
@@ -126,25 +128,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             }else{
                 newScale = SCNVector3(gesture.scale, gesture.scale, gesture.scale)
             }
-            // FIXME: Bug
-            if gesture.scale < 0.5 {
-                print("Action-Shrink 0.5")
-            } else if gesture.scale > 2 {
-                print("Action-Enlarge 2")
-            } else {    // gesture.scale >= 0.5 && gesture.scale <= 2
-                if CGFloat(newScale.x) > gesture.scale {
-                    print("Action-Enlarge")
-                } else if CGFloat(newScale.x) < gesture.scale {
-                    print("Action-Shrink")
-                } else {
-                    print("Action-No change");
-                }
-            }
             
             self.currentObject?.scale = newScale
             gesture.scale = CGFloat((self.currentObject?.scale.x)!)
             
-            
+            self.currentFurniture.actionInteractList.append(Action.Scaling)
+            print(currentFurniture.modelName + " is Action-Scaling")
             
         default:
             gesture.scale = 1.0
@@ -200,6 +189,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         print("create a new furniture")
         currentFurniture.actionInteractList.append(Action.Add)
         print("a new furniture create a Action-Add")
+        self.currentTime = 0
+        print("time cost calculate begin")
         
         if let hit = sceneView.hitTest(viewCenter, types: [.existingPlaneUsingExtent]).first {
             sceneView.session.add(anchor: ARAnchor(transform: hit.worldTransform))
@@ -219,17 +210,21 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         // FIXME: upload confirmFurniture info to server
         print("upload to serve")
-
         
         uploadCPU(cpu: cpuList, urlTail: "ArAnalysis/CpuInfo/receiveCpuInfo")
         print(cpuList)
-        cpuList.resetAll()
+        self.cpuList.resetAll()
+        
         uploadMemory(memory: memoryList, urlTail: "ArAnalysis/MemoryInfo/receivceMemoryInfo")
         print(memoryList)
-        memoryList.resetAll()
-        uploadTriggerCount(furniture: currentFurniture.actionInteractList, urlTail: "ArAnalysis/InteractInfo/receiveTrigger")
+        self.memoryList.resetAll()
         
+        uploadTriggerCount(furniture: self.currentFurniture.actionInteractList, urlTail: "ArAnalysis/InteractInfo/receiveTrigger")
         
+        self.currentFurniture.costTime = self.currentTime
+        uploadGazeObject(furniture: self.currentFurniture, urlTail: "ArAnalysis/InteractInfo/receiveGazeObject")
+        
+        uploadInteractionLostInfo(furniture: self.currentFurniture, urlTail: "ArAnalysis/InteractInfo/receiveInteractListInfo")
    
     }
     
@@ -446,7 +441,9 @@ extension ViewController {
     }
     
     func baseMobileInfo() {
-        Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: Selector(("collectMobileInfo")), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: Double(self.timeInterval), target: self, selector: Selector(("collectMobileInfo")), userInfo: nil, repeats: true)
+        
+        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: Selector(("calculateSeconds")), userInfo: nil, repeats: true)
     }
     
     @objc func collectMobileInfo() {
@@ -461,5 +458,9 @@ extension ViewController {
         // Memory
         memoryList.memoryData.append(memoryRatio)
         memoryList.timeData.append(time)
+    }
+    
+    @objc func calculateSeconds() {
+        self.currentTime += 1
     }
 }

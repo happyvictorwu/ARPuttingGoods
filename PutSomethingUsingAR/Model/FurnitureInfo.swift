@@ -9,12 +9,11 @@
 import Foundation
 
 enum Action {
-    case Enlarge, Shrink, Rotate, Add, Remove
+    case Scaling, Rotate, Add, Remove
 
     var description: String {
         switch self {
-        case .Enlarge: return "Enlarge"
-        case .Shrink: return "Shrink"
+        case .Scaling: return "Scaling"
         case .Rotate: return "Rotate"
         case .Add: return "Add"
         case .Remove: return "Remove"

@@ -59,8 +59,7 @@ func uploadMemory(memory: MemoryInfo, urlTail: String) {
 
 func uploadTriggerCount(furniture: [Action], urlTail: String) {
     // calculate the number of all Action
-    let EnlargeCount: Int = countAction(in: furniture, with: Action.Enlarge)
-    let ShrinkCount: Int = countAction(in: furniture, with: Action.Shrink)
+    let ScalingCount: Int = countAction(in: furniture, with: Action.Scaling)
     let RotateCount: Int = countAction(in: furniture, with: Action.Rotate)
     let AddCount: Int = countAction(in: furniture, with: Action.Add)
     
@@ -71,8 +70,7 @@ func uploadTriggerCount(furniture: [Action], urlTail: String) {
         "appVersion": appVersion,
         "deviceId": deviceId,
         "info": [
-            "放大(Enlarge)": EnlargeCount,
-            "缩小(Shrink)": ShrinkCount,
+            "缩放(Scaling)": ScalingCount,
             "旋转(Rotate)": RotateCount,
             "添加(Add)": AddCount
         ]
@@ -82,8 +80,7 @@ func uploadTriggerCount(furniture: [Action], urlTail: String) {
         debugPrint(response)
     }
     print("TriggerCount uploaded")
-    print("Enlarge: \(EnlargeCount)")
-    print("Shrink: \(ShrinkCount)")
+    print("Scaling: \(ScalingCount)")
     print("Rotate: \(RotateCount)")
     print("Add: \(AddCount)")
     
