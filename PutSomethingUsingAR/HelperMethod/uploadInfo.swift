@@ -5,7 +5,7 @@
 //  Created by Victor Wu on 2019/4/19.
 //  Copyright © 2019 Victor Wu. All rights reserved.
 //
-
+import Foundation
 import Alamofire
 
 let appId: String = "1233211234567"
