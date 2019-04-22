@@ -8,8 +8,8 @@
 import Foundation
 import Alamofire
 
-let appId: String = "1233211234567"
-let appVersion:String = "v1.0"
+let appId: String = "85d4a553-ee8d-4136-80ab-2469adcae44d"
+let appVersion:String = "2.0"
 let deviceId: String = "iOS"
 let urlServer: String = "http://222.201.145.166:8421/"
 
@@ -127,19 +127,6 @@ func uploadInteractionLostInfo(furniture: Furniture, urlTail: String) {
             debugPrint(response)
         }
     }
-    
-//    let parameters: Parameters = [
-//        "appId": appId,
-//        "appVersion": appVersion,
-//        "deviceId": deviceId,
-//        "info": [
-//            modelName: furnitureToString[0]
-//        ]
-//    ]
-//
-//    Alamofire.request(urlInteraction, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
-//        debugPrint(response)
-//    }
     
 }
 
