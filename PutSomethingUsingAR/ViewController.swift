@@ -34,6 +34,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var chairButton: CustomButton!
     @IBOutlet weak var candleButton: CustomButton!
     @IBOutlet weak var measureButton: CustomButton!
+    @IBOutlet weak var measureAddButton: UIButton!
+    @IBOutlet weak var measureDelButton: UIButton!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var LightEstimationButton: UIButton!
@@ -182,6 +184,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         addButton.isHidden = true
         resetButton.isHidden = true
+        measureButton.isHidden = true
         confirmButton.isHidden = false
         
         currentFurniture = Furniture()
@@ -206,6 +209,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         confirmButton.isHidden = true
         resetButton.isHidden = false
         addButton.isHidden = false
+        measureButton.isHidden = false
         
         // FIXME: upload confirmFurniture info to server
         print("upload to serve")
@@ -244,22 +248,34 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         currentMode = .measure
         selectButton(measureButton)
         
-        let parameters: Parameters = [
-            "appId": "appId-test",
-            "appVersion": "appVersion-test",
-            "deviceId": "deviceId-test",
-            "collectTime":"1554341709",
-            "runtimeMemory": [
-                "memoryData":[1,2,3,4,5,6,7,8,9,10],
-                "timeData":[1,2,3,4,5,6,7,8,9,10]
-            ]
+        self.measureAddButton.isHidden = false
+        self.addButton.isHidden = true
+        
+    }
+    
+    @IBAction func didTapMeasureAdd(_ sender: Any) {
 
-
-        ]
-        Alamofire.request("http://222.201.145.166:8421/ArAnalysis/MemoryInfo/receiveMemoryInfo", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
-            debugPrint(response)
+        if let hit = sceneView.hitTest(viewCenter, types: [.existingPlaneUsingExtent]).first {
+            sceneView.session.add(anchor: ARAnchor(transform: hit.worldTransform))
+            return
+        } else if let hit = sceneView.hitTest(viewCenter, types: [.featurePoint]).last {
+            sceneView.session.add(anchor: ARAnchor(transform: hit.worldTransform))
+            return
         }
-        print("memory uploaded")
+    }
+    
+    @IBAction func didTapMeasureDel(_ sender: Any) {
+        measureAddButton.isHidden = true
+        measureDelButton.isHidden = true
+        
+        addButton.isHidden = false
+        
+        vaseButton.isHidden = false
+        candleButton.isHidden = false
+        chairButton.isHidden = false
+        resetButton.isHidden = false
+        
+        selectVase()
         
     }
     
@@ -333,6 +349,45 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         objects = []
     }
     
+    // MARK: - 测量方法
+    func measure(fromNode: SCNNode, toNode: SCNNode) {
+        let measuringLineNode = createLineNode(fromNode: fromNode, toNode: toNode)
+        measuringLineNode.name = "MeasuringLine"
+        sceneView.scene.rootNode.addChildNode(measuringLineNode)
+        objects.append(measuringLineNode)
+        
+        let dist = fromNode.position.distanceTo(toNode.position)
+        let measurementValue = String(format: "%.2f", dist)
+        distanceLabel.text = "Distance: \(measurementValue) m"
+        
+    }
+    
+    func updateMeasuringNodes() {
+        guard measuringNodes.count > 1 else {
+            return
+        }
+        let firstNode = measuringNodes[0]
+        let secondNode = measuringNodes[1]
+        let showMeasuring = self.measuringNodes.count == 2
+        distanceLabel.isHidden = !showMeasuring
+        
+        if showMeasuring {
+            measure(fromNode: firstNode, toNode: secondNode)
+        } else {
+            firstNode.removeFromParentNode()
+            secondNode.removeFromParentNode()
+            measuringNodes.removeFirst(2)
+            
+            for node in sceneView.scene.rootNode.childNodes {
+                if node.name == "MeasuringLine" {
+                    node.removeFromParentNode()
+                }
+            }
+            
+        }
+        
+    }
+    
 }
 
 extension ViewController: ARSCNViewDelegate {
@@ -359,8 +414,23 @@ extension ViewController: ARSCNViewDelegate {
                     self.currentFurniture.modelName = ObjectName
                     print("a new furniture has Model Name call: " + self.currentFurniture.modelName)
                     node.addChildNode(self.currentObject)
+                    
+                    
                 case .measure:
-                    break
+                    let spehereNode = createSphereNode(radius: 0.01)
+                    self.objects.append(spehereNode)
+                    node.addChildNode(spehereNode)
+                    self.measuringNodes.append(node)
+                    
+                    self.measureAddButton.isHidden = false
+                    self.measureDelButton.isHidden = false
+                    
+                    self.addButton.isHidden = true
+                    
+                    self.vaseButton.isHidden = true
+                    self.candleButton.isHidden = true
+                    self.chairButton.isHidden = true
+                    self.resetButton.isHidden = true
                 }
                 
             }
@@ -374,6 +444,8 @@ extension ViewController: ARSCNViewDelegate {
         DispatchQueue.main.async {
             if let planeAnchor = anchor as? ARPlaneAnchor {
                 updatePlaneNode(node.childNodes[0], center: planeAnchor.center, extent: planeAnchor.extent)
+            } else {
+                self.updateMeasuringNodes()
             }
         }
     }

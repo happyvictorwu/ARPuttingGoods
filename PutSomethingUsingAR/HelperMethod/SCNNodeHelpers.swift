@@ -16,7 +16,7 @@ func createPlaneNode(center: vector_float3, extent: vector_float3) -> SCNNode {
     let plane = SCNPlane(width: CGFloat(extent.x), height: CGFloat(extent.z))
     
     let planeMaterial = SCNMaterial()
-    planeMaterial.diffuse.contents = UIColor.white.withAlphaComponent(0.1)
+    planeMaterial.diffuse.contents = UIColor.yellow.withAlphaComponent(0.5)
     plane.materials = [planeMaterial]
     
     let planeNode = SCNNode(geometry: plane)    // 设置这个Node为上述的平面， 默认是打竖的
@@ -44,4 +44,30 @@ func removeChildren(inNode node: SCNNode) {
     for node in node.childNodes {
         node.removeFromParentNode()
     }
+}
+
+// 创建测量的小球
+func createSphereNode(radius: CGFloat) -> SCNNode {
+    let sphere = SCNSphere(radius:radius)
+    sphere.firstMaterial?.diffuse.contents = UIColor.white
+    return SCNNode(geometry: sphere)
+}
+
+// 创建距离的线
+func createLineNode(fromNode: SCNNode, toNode: SCNNode) -> SCNNode {
+    let line = lineFrom(vector: fromNode.position, toVector: toNode.position)
+    let lineNode = SCNNode(geometry: line)
+    let planeMaterial = SCNMaterial()
+    planeMaterial.diffuse.contents = UIColor.white
+    line.materials = [planeMaterial]
+    return lineNode
+}
+
+func lineFrom(vector vector1: SCNVector3, toVector vector2: SCNVector3) -> SCNGeometry {
+    let indices: [Int32] = [0, 1]
+    
+    let source = SCNGeometrySource(vertices: [vector1, vector2])
+    let element = SCNGeometryElement(indices: indices, primitiveType: .line)
+    
+    return SCNGeometry(sources: [source], elements: [element])
 }

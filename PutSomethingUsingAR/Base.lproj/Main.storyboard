@@ -66,7 +66,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IB7-SE-Nlr" userLabel="Distance Label">
-                                <rect key="frame" x="78" y="461" width="67" height="21"/>
+                                <rect key="frame" x="78" y="461" width="272" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -114,6 +114,24 @@
                                     <action selector="didTapSelectLight:" destination="BV1-FR-VrT" eventType="touchUpInside" id="ogM-VW-T3t"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" alpha="0.80000001192092896" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VA5-ZY-IMl" userLabel="Measure Button" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
+                                <rect key="frame" x="172" y="779" width="70" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <state key="normal" title="📲"/>
+                                <connections>
+                                    <action selector="didTapMeasureAdd:" destination="BV1-FR-VrT" eventType="touchUpInside" id="udB-jg-AWa"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" alpha="0.80000001192092896" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jAE-bL-RJp" userLabel="MeasureDel Button" customClass="CustomButton" customModule="PutSomethingUsingAR" customModuleProvider="target">
+                                <rect key="frame" x="324" y="774" width="70" height="72"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <state key="normal" title="⤷"/>
+                                <connections>
+                                    <action selector="didTapMeasureDel:" destination="BV1-FR-VrT" eventType="touchUpInside" id="340-z2-rp6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -134,7 +152,9 @@
                         <outlet property="confirmButton" destination="SRe-jV-nPp" id="HEy-PQ-mAt"/>
                         <outlet property="crosshair" destination="SME-Sn-pDN" id="5Jn-YR-taT"/>
                         <outlet property="distanceLabel" destination="IB7-SE-Nlr" id="fOL-3W-bKX"/>
-                        <outlet property="measureButton" destination="cIA-c7-GhB" id="WW3-0s-bzs"/>
+                        <outlet property="measureAddButton" destination="VA5-ZY-IMl" id="5SI-tN-r8q"/>
+                        <outlet property="measureButton" destination="cIA-c7-GhB" id="JU4-kY-MJY"/>
+                        <outlet property="measureDelButton" destination="jAE-bL-RJp" id="9WT-Vi-RqQ"/>
                         <outlet property="messageLabel" destination="S3Q-wA-q4A" id="oGh-Xm-UMk"/>
                         <outlet property="resetButton" destination="5Hx-yH-RqB" id="ObM-jV-g0G"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
