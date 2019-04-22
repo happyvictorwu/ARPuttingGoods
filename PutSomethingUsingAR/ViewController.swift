@@ -161,16 +161,22 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // MARK: - 点击事件
     @IBAction func didTapVase(_ sender: Any) {
+        self.measureAddButton.isHidden = true
+        self.addButton.isHidden = false
         selectVase()
     }
     
     @IBAction func didTapChair(_ sender: Any) {
+        self.measureAddButton.isHidden = true
+        self.addButton.isHidden = false
         currentMode = .placeObject("Furniture.scnassets/chair/chair.scn", "Chair")
         selectButton(chairButton)
     }
     
     
     @IBAction func didTapCandle(_ sender: Any) {
+        self.measureAddButton.isHidden = true
+        self.addButton.isHidden = false
         currentMode = .placeObject("Furniture.scnassets/candle/candle.scn", "Candle")
         selectButton(candleButton)
     }
