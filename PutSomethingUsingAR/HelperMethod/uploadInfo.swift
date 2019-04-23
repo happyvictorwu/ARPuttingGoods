@@ -13,6 +13,32 @@ let appVersion:String = "2.0"
 let deviceId: String = "iOS"
 let urlServer: String = "http://222.201.145.166:8421/"
 
+
+func sendStartUpInfo() {
+    
+    let urlStart: String = urlServer + "ArAnalysis/BasicInfo/receiveStartUpInfo"
+    
+    let parameters: Parameters = [
+        "appId": appId,
+        "appVersion": appVersion,
+        "deviceId": deviceId,
+        "appPackage": "com.victor",
+        "osVersion": "iOS12",
+        "manufacturer": "apple",
+        "accessType": "Wifi",
+        "cpu": "A12.1",
+        "core": "6 核",
+        "ram": "3GB",
+        "rom": "128GB",
+        "startUpTimeStamp": calculateUnixTimestamp()
+    ]
+    
+    Alamofire.request(urlStart, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+        debugPrint(response)
+    }
+    print("startInfo uploaded")
+}
+
 func uploadCPU(cpu: CpuInfo, urlTail: String) {
     guard !cpu.isEmpty() else { return }
     
@@ -108,24 +134,34 @@ func uploadGazeObject(furniture: Furniture, urlTail: String) {
 func uploadInteractionLostInfo(furniture: Furniture, urlTail: String) {
     let urlInteraction = urlServer + urlTail
     let modelName: String = furniture.modelName
-//    var furnitureToString: [String] = []
+    
+    var resArr = [[String: String]]()
+    
+    var res: [String: String] = [:]
     
     for item in furniture.actionInteractList {
 //        furnitureToString.append(item.description)
         let action: String = item.description
         
-        let parameters: Parameters = [
-            "appId": appId,
-            "appVersion": appVersion,
-            "deviceId": deviceId,
-            "interactList": [
-                ["model": modelName, "method": action],
-            ]
-        ]
+//        let itemJson = ["model": modelName, "method": action]
+//        res.(itemJson)
+        res["model"] = modelName
+        res["method"] = action
         
-        Alamofire.request(urlInteraction, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
-            debugPrint(response)
-        }
+        resArr.append(res)
+    }
+    
+    print(res)
+    
+    let parameters: Parameters = [
+        "appId": appId,
+        "appVersion": appVersion,
+        "deviceId": deviceId,
+        "interactList": resArr // json : [String: String, String: String]
+    ]
+    
+    Alamofire.request(urlInteraction, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+        debugPrint(response)
     }
     
 }

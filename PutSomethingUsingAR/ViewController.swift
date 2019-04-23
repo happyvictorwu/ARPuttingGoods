@@ -8,6 +8,7 @@
 
 import UIKit
 import ARKit
+import QuickLook
 import Alamofire
 
 enum FunctionMode {
@@ -57,6 +58,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: - 重写方法
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        sendStartUpInfo()
         
         runSession()
         messageLabel.text = ""
