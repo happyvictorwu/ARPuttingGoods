@@ -16,7 +16,7 @@ class ARQuickLookController: UIViewController,
 
     @IBOutlet weak var tableView: UITableView!
     
-    let modelNames = ["Teapot", "Gramophone", "Pig"]
+    let modelNames = ["Teapot", "Gramophone", "Pig", "Closet", "Oben"]
     var modelImages = [UIImage]()
     var modelIndex = 0;
     
@@ -47,7 +47,7 @@ class ARQuickLookController: UIViewController,
         let cell = tableView.dequeueReusableCell(withIdentifier: "GalleryReusableCell")! as! GalleryTableViewCell
         
         cell.modelImage.image = modelImages[indexPath.row]
-        cell.modelName.text = modelNames[indexPath.row]
+        cell.modelName.text = modelNames[indexPath.row] + "模型"
         
         return cell
     }
