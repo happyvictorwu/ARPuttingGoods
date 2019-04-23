@@ -37,7 +37,7 @@
 		721AAF6122647A0D0051C145 /* Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
 		721AAF6F2264C0350051C145 /* CPUInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPUInfo.swift; sourceTree = "<group>"; };
 		7248AE65226EE0890004E2F3 /* ARQuickLookController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARQuickLookController.swift; sourceTree = "<group>"; };
-		7248AE67226EE0E00004E2F3 /* GalleryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GalleryTableViewCell.swift; path = CustomThings/GalleryTableViewCell.swift; sourceTree = "<group>"; };
+		7248AE67226EE0E00004E2F3 /* GalleryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryTableViewCell.swift; sourceTree = "<group>"; };
 		7248AE6C226EF0170004E2F3 /* Pig.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pig.usdz; sourceTree = "<group>"; };
 		7248AE6D226EF0170004E2F3 /* Teapot.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Teapot.usdz; sourceTree = "<group>"; };
 		7248AE6E226EF0170004E2F3 /* Gramophone.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Gramophone.usdz; sourceTree = "<group>"; };
@@ -101,6 +101,24 @@
 			path = USDZ;
 			sourceTree = "<group>";
 		};
+		729DFEE6226EFD1900313919 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				72E7D8E8225C87F200C58C23 /* AppDelegate.swift */,
+				72E7D8EC225C87F200C58C23 /* ViewController.swift */,
+				7248AE65226EE0890004E2F3 /* ARQuickLookController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		729DFEE7226EFD5A00313919 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				72E7D8EE225C87F200C58C23 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		72A96DF5226037D100E8359A /* ClassExtension */ = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +131,7 @@
 		72A96DF62260380000E8359A /* CustomThings */ = {
 			isa = PBXGroup;
 			children = (
+				7248AE67226EE0E00004E2F3 /* GalleryTableViewCell.swift */,
 				72E7D902225C98C600C58C23 /* CustomButton.swift */,
 			);
 			path = CustomThings;
@@ -150,16 +169,13 @@
 		72E7D8E7225C87F200C58C23 /* PutSomethingUsingAR */ = {
 			isa = PBXGroup;
 			children = (
-				7248AE6B226EF0170004E2F3 /* USDZ */,
 				721AAF60226479E50051C145 /* Model */,
-				72E7D8E8225C87F200C58C23 /* AppDelegate.swift */,
-				72E7D8EC225C87F200C58C23 /* ViewController.swift */,
-				7248AE65226EE0890004E2F3 /* ARQuickLookController.swift */,
-				7248AE67226EE0E00004E2F3 /* GalleryTableViewCell.swift */,
-				72E7D8EE225C87F200C58C23 /* Main.storyboard */,
+				729DFEE6226EFD1900313919 /* Controller */,
+				729DFEE7226EFD5A00313919 /* View */,
 				72A96DF5226037D100E8359A /* ClassExtension */,
 				72A96DF72260385200E8359A /* HelperMethod */,
 				72A96DF62260380000E8359A /* CustomThings */,
+				7248AE6B226EF0170004E2F3 /* USDZ */,
 				72E7D8F1225C87F400C58C23 /* Assets.xcassets */,
 				72E7D900225C979200C58C23 /* Furniture.scnassets */,
 				72E7D8F3225C87F400C58C23 /* LaunchScreen.storyboard */,
