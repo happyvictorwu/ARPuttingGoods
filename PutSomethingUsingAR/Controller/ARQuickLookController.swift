@@ -16,7 +16,7 @@ class ARQuickLookController: UIViewController,
 
     @IBOutlet weak var tableView: UITableView!
     
-    let modelNames = ["Teapot", "Gramophone", "Pig", "Closet", "Oben"]
+    let modelNames = ["Teapot", "Gramophone", "Pig", "Closet", "Closet_open", "andy"]
     var modelImages = [UIImage]()
     var modelIndex = 0;
     
@@ -61,6 +61,10 @@ class ARQuickLookController: UIViewController,
         previewController.dataSource = self
         previewController.delegate = self
         present(previewController, animated: false)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {  //
+        return 150
     }
     
     // MARK: - QLPreviewControllerDataSource

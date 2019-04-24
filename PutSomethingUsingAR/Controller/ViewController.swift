@@ -545,7 +545,7 @@ extension ViewController {
     
     @objc func collectMobileInfo() {
         let cpuUserRatio:Double = cpuUsage().user
-        let memoryRatio: Double = report_memory().ratio
+        let memoryRatio: Double = report_memory().usage * 1024
         let time = calculateUnixTimestamp()
         
         // CPU

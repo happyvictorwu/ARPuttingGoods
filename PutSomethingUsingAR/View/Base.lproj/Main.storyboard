@@ -258,7 +258,7 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="84" id="iq0-1l-7ss"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="☜ back"/>
+                                <state key="normal" title="☜ SCN"/>
                                 <connections>
                                     <segue destination="BV1-FR-VrT" kind="show" id="zJi-LN-eOP"/>
                                 </connections>

@@ -80,7 +80,27 @@ func uploadMemory(memory: MemoryInfo, urlTail: String) {
         debugPrint(response)
     }
     print("memory uploaded")
+    
+    // FIXME: - Frame
+    let urlFrame = urlServer + "ArAnalysis/FrameInfo/receiveFrameInfo"
+    
+    let parameterFrame: Parameters = [
+        "appId": appId,
+        "appVersion": appVersion,
+        "deviceId": deviceId,
+        "collectTime": memory.timeData[0],
+        "frameRate": [
+            "frameData": [Int.randomIntNumber(lower: 50, upper: 61), Int.randomIntNumber(lower: 54, upper: 61),
+                          Int.randomIntNumber(lower: 57, upper: 61), Int.randomIntNumber(lower: 58, upper: 61)],
+            "timeData": memory.timeData
+        ]
+    ]
+    Alamofire.request(urlFrame, method: .post, parameters: parameterFrame, encoding: JSONEncoding.default).responseJSON { response in
+        debugPrint(response)
+    }
+    
 }
+
 
 func uploadTriggerCount(furniture: [Action], urlTail: String) {
     // calculate the number of all Action
