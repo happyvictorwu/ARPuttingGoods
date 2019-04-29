@@ -25,9 +25,9 @@ func sendStartUpInfo() {
         "appPackage": "com.victor",
         "osVersion": "iOS12",
         "manufacturer": "apple",
-        "accessType": "Wifi",
-        "cpu": "A12.1",
-        "core": "6 核",
+        "accessType": "Wi-Fi",
+        "cpu": "A12",
+        "core": "6核",
         "ram": "3GB",
         "rom": "128GB",
         "startUpTimeStamp": calculateUnixTimestamp()
