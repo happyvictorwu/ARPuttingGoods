@@ -20,6 +20,7 @@
 		729DFEEB226F118A00313919 /* Closet.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 729DFEEA226F118A00313919 /* Closet.usdz */; };
 		729DFEEF226FF28B00313919 /* andy.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 729DFEEE226FF28B00313919 /* andy.usdz */; };
 		729DFEF1226FF48100313919 /* Closet_open.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 729DFEF0226FF48100313919 /* Closet_open.usdz */; };
+		72C65E512276A7430064753D /* ARInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C65E502276A7430064753D /* ARInfoController.swift */; };
 		72D3AAAD226969050009BF50 /* uploadInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D3AAAC226969050009BF50 /* uploadInfo.swift */; };
 		72E7D8E9225C87F200C58C23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7D8E8225C87F200C58C23 /* AppDelegate.swift */; };
 		72E7D8ED225C87F200C58C23 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7D8EC225C87F200C58C23 /* ViewController.swift */; };
@@ -49,6 +50,7 @@
 		729DFEEA226F118A00313919 /* Closet.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Closet.usdz; sourceTree = "<group>"; };
 		729DFEEE226FF28B00313919 /* andy.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = andy.usdz; sourceTree = "<group>"; };
 		729DFEF0226FF48100313919 /* Closet_open.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Closet_open.usdz; sourceTree = "<group>"; };
+		72C65E502276A7430064753D /* ARInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARInfoController.swift; sourceTree = "<group>"; };
 		72D3AAAC226969050009BF50 /* uploadInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = uploadInfo.swift; sourceTree = "<group>"; };
 		72E7D8E5225C87F200C58C23 /* PutSomethingUsingAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PutSomethingUsingAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72E7D8E8225C87F200C58C23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -157,6 +159,14 @@
 			path = HelperMethod;
 			sourceTree = "<group>";
 		};
+		72C65E4F2276A7180064753D /* ARSDK */ = {
+			isa = PBXGroup;
+			children = (
+				72C65E502276A7430064753D /* ARInfoController.swift */,
+			);
+			path = ARSDK;
+			sourceTree = "<group>";
+		};
 		72E7D8DC225C87F200C58C23 = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +188,7 @@
 		72E7D8E7225C87F200C58C23 /* PutSomethingUsingAR */ = {
 			isa = PBXGroup;
 			children = (
+				72C65E4F2276A7180064753D /* ARSDK */,
 				721AAF60226479E50051C145 /* Model */,
 				729DFEE6226EFD1900313919 /* Controller */,
 				729DFEE7226EFD5A00313919 /* View */,
@@ -343,6 +354,7 @@
 				725EDA20226708CC00193BEC /* FurnitureInfo.swift in Sources */,
 				72E7D8ED225C87F200C58C23 /* ViewController.swift in Sources */,
 				72E7D8E9225C87F200C58C23 /* AppDelegate.swift in Sources */,
+				72C65E512276A7430064753D /* ARInfoController.swift in Sources */,
 				72E7D903225C98C600C58C23 /* CustomButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
