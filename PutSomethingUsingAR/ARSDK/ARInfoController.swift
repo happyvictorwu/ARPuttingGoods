@@ -9,6 +9,18 @@
 import Foundation
 import Alamofire
 
+enum Action {
+    case Scaling, Rotate, Add
+    
+    var description: String {
+        switch self {
+        case .Scaling: return "缩放(Scaling)"
+        case .Rotate: return "旋转(Rotate)"
+        case .Add: return "放置(Add)"
+        }
+    }
+}
+
 class ARInfoController {
     
     fileprivate var loadPrevious = host_cpu_load_info() // cpu需要使用
@@ -24,6 +36,15 @@ class ARInfoController {
     let deviceId: String = "iOS"
     let urlServer: String = "http://222.201.145.166:8421/"
     
+    // upload url
+    let startTail: String = "ArAnalysis/BasicInfo/receiveStartUpInfo"
+    let CPUTail: String = "ArAnalysis/CpuInfo/receiveCpuInfo"
+    let memoryTail: String = "ArAnalysis/MemoryInfo/receiveMemoryInfo"
+    let frameTail: String = "ArAnalysis/FrameInfo/receiveFrameInfo"
+    let gazeTail: String = "ArAnalysis/InteractInfo/receiveGazeObject"
+    let triggerTail: String = "ArAnalysis/InteractInfo/receiveTrigger"
+    let interactTail: String = "ArAnalysis/InteractInfo/receiveInteractListInfo"
+    
     
     init() {
         currentTime = 0
@@ -34,14 +55,43 @@ class ARInfoController {
     }
     
     func start() {
+        sendStartUpInfo()
         baseMobileInfo()
+        Timer.scheduledTimer(timeInterval: Double(self.timeInterval), target: self, selector: Selector(("uploadAll")), userInfo: nil, repeats: true)
+    }
+    
+    @objc func uploadAll() {
+        uploadCPU(cpu: cpuList)
+        uploadMemory(memory: memoryList)
     }
     
     // MARK: - UPLoad
-    func uploadCPU(cpu: CpuInfo, urlTail: String) {
+    func sendStartUpInfo() {
+        
+        let urlStart: String = urlServer + startTail
+        
+        let parameters: Parameters = [
+            "appId": appId,
+            "appVersion": appVersion,
+            "deviceId": deviceId,
+            "appPackage": "com.victor",
+            "osVersion": "iOS12",
+            "manufacturer": "apple",
+            "accessType": "Wi-Fi",
+            "cpu": "A12",
+            "core": "6核",
+            "ram": "3GB",
+            "rom": "128GB",
+            "startUpTimeStamp": calculateUnixTimestamp()
+        ]
+        requestPost(with: urlStart, by: parameters)
+        print("startInfo uploaded")
+    }
+    
+    func uploadCPU(cpu: CpuInfo) {
         guard !cpu.isEmpty() else { return }
         
-        let urlCPU = urlServer + urlTail
+        let urlCPU = urlServer + CPUTail
         
         let parameters: Parameters = [
             "appId": appId,
@@ -56,13 +106,15 @@ class ARInfoController {
         
         requestPost(with: urlCPU, by: parameters)
         print("cpu uploaded")
+        
+        cpuList.resetAll()
     }
     
-    // And Frame
-    func uploadMemory(memory: MemoryInfo, urlTail: String) {
+    // Memory and Frame
+    func uploadMemory(memory: MemoryInfo) {
         guard !memory.isEmpty() else { return }
         
-        let urlMemory = urlServer + urlTail
+        let urlMemory = urlServer + memoryTail
         
         let parameters: Parameters = [
             "appId": appId,
@@ -76,9 +128,10 @@ class ARInfoController {
         ]
         requestPost(with: urlMemory, by: parameters)
         print("memory uploaded")
+        memoryList.resetAll()
         
         // FIXME: Frame
-        let urlFrame = urlServer + "ArAnalysis/FrameInfo/receiveFrameInfo"
+        let urlFrame = urlServer + frameTail
         
         let parameterFrame: Parameters = [
             "appId": appId,
@@ -93,6 +146,93 @@ class ARInfoController {
         ]
         requestPost(with: urlFrame, by: parameterFrame)
         print("frame uploaded")
+    }
+    
+    func uploadGazeObject(modelName: String, gazeTime: Int) {
+        let urlGaze = urlServer + gazeTail
+        
+        let parameters: Parameters = [
+            "appId": appId,
+            "appVersion": appVersion,
+            "deviceId": deviceId,
+            "info": [
+                modelName: gazeTime
+            ]
+        ]
+        
+        requestPost(with: urlGaze, by: parameters)
+        print("gazeTime upload")
+    }
+    
+    // work for TriggerCount
+    func countAction(in furniture: [Action], with action: Action) -> Int {
+        var ans = 0
+        
+        for item in furniture {
+            if item == action {
+                ans += 1
+            }
+        }
+        
+        return ans
+    }
+
+    func uploadTriggerCount(modelAction: [Action]) {    // Action only would be Add Scaling Rotate
+        // calculate the number of all Action
+        let ScalingCount: Int = countAction(in: modelAction, with: Action.Scaling)
+        let RotateCount: Int = countAction(in: modelAction, with: Action.Rotate)
+        let AddCount: Int = countAction(in: modelAction, with: Action.Add)
+        
+        let urlTrigger = urlServer + triggerTail
+        
+        let parameters: Parameters = [
+            "appId": appId,
+            "appVersion": appVersion,
+            "deviceId": deviceId,
+            "info": [
+                "缩放(Scaling)": ScalingCount,
+                "旋转(Rotate)": RotateCount,
+                "添加(Add)": AddCount
+            ]
+        ]
+        
+        requestPost(with: urlTrigger, by: parameters)
+        print("TriggerCount uploaded")
+        print("Scaling: \(ScalingCount)")
+        print("Rotate: \(RotateCount)")
+        print("Add: \(AddCount)")
+        
+    }
+    
+    func uploadInteractionLostInfo(modelName: String, methodList: [Action]) {
+        let urlInteraction = urlServer + interactTail
+        
+        var resArr = [[String: String]]()
+        
+        var res: [String: String] = [:]
+        
+        for item in methodList {
+            let action: String = item.description
+  
+            res["model"] = modelName
+            res["method"] = action
+            
+            resArr.append(res)
+        }
+        
+        print(res)
+        
+        let parameters: Parameters = [
+            "appId": appId,
+            "appVersion": appVersion,
+            "deviceId": deviceId,
+            "interactList": resArr // json : [String: String, String: String]
+        ]
+        
+        Alamofire.request(urlInteraction, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+            debugPrint(response)
+        }
+        
     }
     
     // Custom post method by Alamofire post

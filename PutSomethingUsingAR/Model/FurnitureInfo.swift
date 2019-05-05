@@ -8,17 +8,17 @@
 
 import Foundation
 
-enum Action {
-    case Scaling, Rotate, Add
-    
-    var description: String {
-        switch self {
-        case .Scaling: return "缩放(Scaling)"
-        case .Rotate: return "旋转(Rotate)"
-        case .Add: return "放置(Add)"
-        }
-    }
-}
+//enum Action {
+//    case Scaling, Rotate, Add
+//    
+//    var description: String {
+//        switch self {
+//        case .Scaling: return "缩放(Scaling)"
+//        case .Rotate: return "旋转(Rotate)"
+//        case .Add: return "放置(Add)"
+//        }
+//    }
+//}
 
 struct Furniture {
     var modelName: String = "unknow"

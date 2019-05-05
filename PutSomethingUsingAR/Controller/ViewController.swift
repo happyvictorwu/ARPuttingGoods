@@ -22,9 +22,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     fileprivate var loadPrevious = host_cpu_load_info() // cpu需要使用
     
     // MARK: - 信息采集
-    let timeInterval: Int = 2  // 信息采集时间间隔
-    var cpuList: CpuInfo = CpuInfo.init()   // cpu的信息
-    var memoryList: MemoryInfo = MemoryInfo.init()  // 内存信息
+//    let timeInterval: Int = 2  // 信息采集时间间隔
+//    var cpuList: CpuInfo = CpuInfo.init()   // cpu的信息
+//    var memoryList: MemoryInfo = MemoryInfo.init()  // 内存信息
+    var arCollection = ARInfoController.init()
     
     var currentFurniture: Furniture!    // 当前模型信息
     var currentTime: Int = 0
@@ -59,8 +60,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        sendStartUpInfo()
-        
         runSession()
         messageLabel.text = ""
         distanceLabel.isHidden = true
@@ -68,7 +67,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         GestureRecognizerInit() // 初始化手势
         
         // 收集CPU，内存占用
-        baseMobileInfo()
+//        baseMobileInfo()
         
     }
     
@@ -222,22 +221,30 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         // FIXME: upload confirmFurniture info to server
         print("upload to serve")
+//
+//        uploadCPU(cpu: cpuList, urlTail: "ArAnalysis/CpuInfo/receiveCpuInfo")
+//        print(cpuList)
+//        self.cpuList.resetAll()
+//
+//        uploadMemory(memory: memoryList, urlTail: "ArAnalysis/MemoryInfo/receiveMemoryInfo")
+//        print(memoryList)
+//        self.memoryList.resetAll()
         
-        uploadCPU(cpu: cpuList, urlTail: "ArAnalysis/CpuInfo/receiveCpuInfo")
-        print(cpuList)
-        self.cpuList.resetAll()
+//        uploadTriggerCount(furniture: self.currentFurniture.actionInteractList, urlTail: "ArAnalysis/InteractInfo/receiveTrigger")
         
-        uploadMemory(memory: memoryList, urlTail: "ArAnalysis/MemoryInfo/receiveMemoryInfo")
-        print(memoryList)
-        self.memoryList.resetAll()
+//        self.currentFurniture.costTime = self.currentTime
+//        uploadGazeObject(furniture: self.currentFurniture, urlTail: "ArAnalysis/InteractInfo/receiveGazeObject")
+//
+//        uploadInteractionLostInfo(furniture: self.currentFurniture, urlTail: "ArAnalysis/InteractInfo/receiveInteractListInfo")
+        let f_modelName: String = self.currentFurniture.modelName
+        let f_costTime: Int = self.currentFurniture.costTime
+        let f_modelAction: [Action] = self.currentFurniture.actionInteractList
         
-        uploadTriggerCount(furniture: self.currentFurniture.actionInteractList, urlTail: "ArAnalysis/InteractInfo/receiveTrigger")
-        
+        arCollection.uploadTriggerCount(modelAction: f_modelAction)
         self.currentFurniture.costTime = self.currentTime
-        uploadGazeObject(furniture: self.currentFurniture, urlTail: "ArAnalysis/InteractInfo/receiveGazeObject")
-        
-        uploadInteractionLostInfo(furniture: self.currentFurniture, urlTail: "ArAnalysis/InteractInfo/receiveInteractListInfo")
-        
+        arCollection.uploadGazeObject(modelName: f_modelName, gazeTime: f_costTime)
+        arCollection.uploadInteractionLostInfo(modelName: f_modelName, methodList: f_modelAction)
+    
     }
     
     @IBAction func didTapSelectLight(_ sender: Any) {
@@ -290,6 +297,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // MARK: - 初始化配置
     func runSession() {
+        arCollection.start()
         guard ARWorldTrackingConfiguration.isSupported else {
             messageLabel.text = "不支持 ARConfig: AR World Tracking"
             messageLabel.textColor = UIColor.red
@@ -514,50 +522,50 @@ extension ViewController: ARSCNViewDelegate {
 }
 
 
-extension ViewController {
-    
-    //Get CPU
-    func cpuUsage() -> (system: Double, user: Double, idle : Double, nice: Double){
-        let load = hostCPULoadInfo();
-        
-        let usrDiff: Double = Double((load?.cpu_ticks.0)! - loadPrevious.cpu_ticks.0);
-        let systDiff = Double((load?.cpu_ticks.1)! - loadPrevious.cpu_ticks.1);
-        let idleDiff = Double((load?.cpu_ticks.2)! - loadPrevious.cpu_ticks.2);
-        let niceDiff = Double((load?.cpu_ticks.3)! - loadPrevious.cpu_ticks.3);
-        
-        let totalTicks = usrDiff + systDiff + idleDiff + niceDiff
-        print("Total ticks is ", totalTicks);
-        let sys = systDiff / totalTicks * 100.0
-        let usr = usrDiff / totalTicks * 100.0
-        let idle = idleDiff / totalTicks * 100.0
-        let nice = niceDiff / totalTicks * 100.0
-        
-        loadPrevious = load!
-        
-        return (sys, usr, idle, nice);
-    }
-    
-    func baseMobileInfo() {
-        Timer.scheduledTimer(timeInterval: Double(self.timeInterval), target: self, selector: Selector(("collectMobileInfo")), userInfo: nil, repeats: true)
-        
-        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: Selector(("calculateSeconds")), userInfo: nil, repeats: true)
-    }
-    
-    @objc func collectMobileInfo() {
-        let cpuUserRatio:Double = cpuUsage().user
-        let memoryRatio: Double = report_memory().usage * 1024
-        let time = calculateUnixTimestamp()
-        
-        // CPU
-        cpuList.cpuData.append(cpuUserRatio)
-        cpuList.timeData.append(time)
-        
-        // Memory
-        memoryList.memoryData.append(memoryRatio)
-        memoryList.timeData.append(time)
-    }
-    
-    @objc func calculateSeconds() {
-        self.currentTime += 1
-    }
-}
+//extension ViewController {
+//
+//    //Get CPU
+//    func cpuUsage() -> (system: Double, user: Double, idle : Double, nice: Double){
+//        let load = hostCPULoadInfo();
+//
+//        let usrDiff: Double = Double((load?.cpu_ticks.0)! - loadPrevious.cpu_ticks.0);
+//        let systDiff = Double((load?.cpu_ticks.1)! - loadPrevious.cpu_ticks.1);
+//        let idleDiff = Double((load?.cpu_ticks.2)! - loadPrevious.cpu_ticks.2);
+//        let niceDiff = Double((load?.cpu_ticks.3)! - loadPrevious.cpu_ticks.3);
+//
+//        let totalTicks = usrDiff + systDiff + idleDiff + niceDiff
+//        print("Total ticks is ", totalTicks);
+//        let sys = systDiff / totalTicks * 100.0
+//        let usr = usrDiff / totalTicks * 100.0
+//        let idle = idleDiff / totalTicks * 100.0
+//        let nice = niceDiff / totalTicks * 100.0
+//
+//        loadPrevious = load!
+//
+//        return (sys, usr, idle, nice);
+//    }
+//
+//    func baseMobileInfo() {
+//        Timer.scheduledTimer(timeInterval: Double(self.timeInterval), target: self, selector: Selector(("collectMobileInfo")), userInfo: nil, repeats: true)
+//
+//        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: Selector(("calculateSeconds")), userInfo: nil, repeats: true)
+//    }
+//
+//    @objc func collectMobileInfo() {
+//        let cpuUserRatio:Double = cpuUsage().user
+//        let memoryRatio: Double = report_memory().usage * 1024
+//        let time = calculateUnixTimestamp()
+//
+//        // CPU
+//        cpuList.cpuData.append(cpuUserRatio)
+//        cpuList.timeData.append(time)
+//
+//        // Memory
+//        memoryList.memoryData.append(memoryRatio)
+//        memoryList.timeData.append(time)
+//    }
+//
+//    @objc func calculateSeconds() {
+//        self.currentTime += 1
+//    }
+//}
