@@ -1,4 +1,4 @@
-framework module Pods_PutSomethingUsingAR {
+module Pods_PutSomethingUsingAR {
   umbrella header "Pods-PutSomethingUsingAR-umbrella.h"
 
   export *

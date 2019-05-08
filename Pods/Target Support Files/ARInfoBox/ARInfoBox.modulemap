@@ -1,0 +1,6 @@
+module ARInfoBox {
+  umbrella header "ARInfoBox-umbrella.h"
+
+  export *
+  module * { export * }
+}

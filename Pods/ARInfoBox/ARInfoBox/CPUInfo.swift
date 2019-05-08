@@ -1,29 +1,34 @@
 //
 //  CPUInfo.swift
-//  PutSomethingUsingAR
+//  ARInfoBox
 //
-//  Created by Victor Wu on 2019/4/15.
+//  Created by Victor Wu on 2019/5/8.
 //  Copyright © 2019 Victor Wu. All rights reserved.
 //
 
 import Foundation
 
-struct CpuInfo {
-    var cpuData: [Double] = []
-    var timeData: [String] = []
+public struct CpuInfo {
+    public var cpuData: [Double]
+    public var timeData: [String]
     
-    func isEmpty() -> Bool {
+    public init() {
+        cpuData = []
+        timeData = []
+    }
+    
+    public func isEmpty() -> Bool {
         guard cpuData.count == timeData.count else { print("check cpuData.count(\(cpuData.count)) no equial to timeData.count(\(timeData.count))"); return true}
         return cpuData.isEmpty
     }
     
-    mutating func resetAll() {
+    public mutating func resetAll() {
         self.cpuData.removeAll()
         self.timeData.removeAll()
     }
 }
 
-func hostCPULoadInfo() -> host_cpu_load_info? {
+public func hostCPULoadInfo() -> host_cpu_load_info? {
     let HOST_CPU_LOAD_INFO_COUNT = MemoryLayout<host_cpu_load_info>.stride/MemoryLayout<integer_t>.stride
     var size = mach_msg_type_number_t(HOST_CPU_LOAD_INFO_COUNT)
     var cpuLoadInfo = host_cpu_load_info()

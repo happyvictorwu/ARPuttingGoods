@@ -1,29 +1,35 @@
 //
 //  Memory.swift
-//  PutSomethingUsingAR
+//  ARInfoBox
 //
-//  Created by Victor Wu on 2019/4/15.
+//  Created by Victor Wu on 2019/5/8.
 //  Copyright © 2019 Victor Wu. All rights reserved.
 //
+
 import Foundation
 
-struct MemoryInfo {
-    var memoryData: [Double] = []
-    var timeData: [String] = []
+public struct MemoryInfo {
+    public var memoryData: [Double]
+    public var timeData: [String]
     
-    func isEmpty() -> Bool {
+    public init() {
+        memoryData = []
+        timeData = []
+    }
+    
+    public func isEmpty() -> Bool {
         guard memoryData.count == timeData.count else { print("check memoryData no equial to timeData.count"); return true}
         return memoryData.isEmpty
     }
     
-    mutating func resetAll() {
+    public mutating func resetAll() {
         self.memoryData.removeAll()
         self.timeData.removeAll()
     }
     
 }
 
-struct ApplicationMemoryCurrentUsage {
+public struct ApplicationMemoryCurrentUsage {
     
     var usage : Double = 0.0
     var total : Double = 0.0
@@ -34,7 +40,7 @@ struct ApplicationMemoryCurrentUsage {
     }
 }
 
-func report_memory()->ApplicationMemoryCurrentUsage {
+public func report_memory()->ApplicationMemoryCurrentUsage {
     var info = mach_task_basic_info()
     var count = mach_msg_type_number_t(MemoryLayout<mach_task_basic_info>.size)/4
     

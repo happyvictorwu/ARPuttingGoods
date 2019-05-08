@@ -9,7 +9,7 @@
 import UIKit
 import ARKit
 import QuickLook
-import Alamofire
+import ARInfoBox
 
 enum FunctionMode {
     case none
@@ -25,7 +25,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
 //    let timeInterval: Int = 2  // 信息采集时间间隔
 //    var cpuList: CpuInfo = CpuInfo.init()   // cpu的信息
 //    var memoryList: MemoryInfo = MemoryInfo.init()  // 内存信息
-    var arCollection = ARInfoController.init()
+    var arCollection: ARInfoController = ARInfoController.init()
     
     var currentFurniture: Furniture!    // 当前模型信息
     var currentTime: Int = 0

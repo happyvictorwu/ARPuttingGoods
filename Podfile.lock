@@ -1,20 +1,21 @@
 PODS:
   - Alamofire (4.8.2)
-  - SwiftyJSON (4.3.0)
+  - ARInfoBox (0.0.4):
+    - Alamofire (~> 4.7)
 
 DEPENDENCIES:
-  - Alamofire
-  - SwiftyJSON
+  - ARInfoBox (~> 0.0.4)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
-    - SwiftyJSON
+  https://github.com/happy-yuxuan/ARPodSpecs.git:
+    - ARInfoBox
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
-  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
+  ARInfoBox: 2d992d28017d4ac0a4b1f53459ec172f058c0269
 
-PODFILE CHECKSUM: 3311ff51060485f6fd4f84e7b8da98d6923412b5
+PODFILE CHECKSUM: 00327e665e2b4c3705b596b3d6a5345bbfe90a89
 
 COCOAPODS: 1.6.1
