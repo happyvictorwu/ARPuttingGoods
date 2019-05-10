@@ -25,7 +25,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
 //    let timeInterval: Int = 2  // 信息采集时间间隔
 //    var cpuList: CpuInfo = CpuInfo.init()   // cpu的信息
 //    var memoryList: MemoryInfo = MemoryInfo.init()  // 内存信息
-    var arCollection: ARInfoController = ARInfoController.init()
+    var arCollection: ARInfoController = ARInfoController.init(appId: "85d4a553-ee8d-4136-80ab-2469adcae44d")
     
     var currentFurniture: Furniture!    // 当前模型信息
     var currentTime: Int = 0
@@ -314,7 +314,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         LightEstimationButton.setTitle("🌞", for: UIControl.State.normal)
         sceneView.session.run(configuration)
         #if DEBUG
-        sceneView.debugOptions = ARSCNDebugOptions.showFeaturePoints
+//        sceneView.debugOptions = ARSCNDebugOptions.showFeaturePoints
         #endif
     }
     
@@ -331,9 +331,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         } else {
             LightEstimationButton.setTitle("🌛", for: UIControl.State.normal)
         }
-        sceneView.session.run(configuration)
+//        sceneView.session.run(configuration)
         #if DEBUG
-        sceneView.debugOptions = ARSCNDebugOptions.showFeaturePoints
+//        sceneView.debugOptions = ARSCNDebugOptions.showFeaturePoints
         #endif
     }
     
@@ -417,8 +417,8 @@ extension ViewController: ARSCNViewDelegate {
                 self.messageLabel.text = "发现理想平面"
                 self.messageLabel.textColor = UIColor.green
                 #if DEBUG
-                let planeNode = createPlaneNode(center: planeAnchor.center, extent: planeAnchor.extent)
-                node.addChildNode(planeNode)
+//                let planeNode = createPlaneNode(center: planeAnchor.center, extent: planeAnchor.extent)
+//                node.addChildNode(planeNode)
                 #endif
             } else {
                 
@@ -520,52 +520,3 @@ extension ViewController: ARSCNViewDelegate {
         }
     }
 }
-
-
-//extension ViewController {
-//
-//    //Get CPU
-//    func cpuUsage() -> (system: Double, user: Double, idle : Double, nice: Double){
-//        let load = hostCPULoadInfo();
-//
-//        let usrDiff: Double = Double((load?.cpu_ticks.0)! - loadPrevious.cpu_ticks.0);
-//        let systDiff = Double((load?.cpu_ticks.1)! - loadPrevious.cpu_ticks.1);
-//        let idleDiff = Double((load?.cpu_ticks.2)! - loadPrevious.cpu_ticks.2);
-//        let niceDiff = Double((load?.cpu_ticks.3)! - loadPrevious.cpu_ticks.3);
-//
-//        let totalTicks = usrDiff + systDiff + idleDiff + niceDiff
-//        print("Total ticks is ", totalTicks);
-//        let sys = systDiff / totalTicks * 100.0
-//        let usr = usrDiff / totalTicks * 100.0
-//        let idle = idleDiff / totalTicks * 100.0
-//        let nice = niceDiff / totalTicks * 100.0
-//
-//        loadPrevious = load!
-//
-//        return (sys, usr, idle, nice);
-//    }
-//
-//    func baseMobileInfo() {
-//        Timer.scheduledTimer(timeInterval: Double(self.timeInterval), target: self, selector: Selector(("collectMobileInfo")), userInfo: nil, repeats: true)
-//
-//        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: Selector(("calculateSeconds")), userInfo: nil, repeats: true)
-//    }
-//
-//    @objc func collectMobileInfo() {
-//        let cpuUserRatio:Double = cpuUsage().user
-//        let memoryRatio: Double = report_memory().usage * 1024
-//        let time = calculateUnixTimestamp()
-//
-//        // CPU
-//        cpuList.cpuData.append(cpuUserRatio)
-//        cpuList.timeData.append(time)
-//
-//        // Memory
-//        memoryList.memoryData.append(memoryRatio)
-//        memoryList.timeData.append(time)
-//    }
-//
-//    @objc func calculateSeconds() {
-//        self.currentTime += 1
-//    }
-//}

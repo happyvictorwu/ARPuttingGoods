@@ -1,10 +1,10 @@
 PODS:
   - Alamofire (4.8.2)
-  - ARInfoBox (0.0.4):
+  - ARInfoBox (0.0.5):
     - Alamofire (~> 4.7)
 
 DEPENDENCIES:
-  - ARInfoBox (~> 0.0.4)
+  - ARInfoBox (~> 0.0.5)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -14,8 +14,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
-  ARInfoBox: 2d992d28017d4ac0a4b1f53459ec172f058c0269
+  ARInfoBox: 45176b05f0223017818a5c51e465aaf839bfd957
 
-PODFILE CHECKSUM: 00327e665e2b4c3705b596b3d6a5345bbfe90a89
+PODFILE CHECKSUM: e20b593ba882cddd68df78608f33fb2d1990687b
 
 COCOAPODS: 1.6.1

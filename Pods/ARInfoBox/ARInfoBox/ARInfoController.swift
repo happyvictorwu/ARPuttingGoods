@@ -33,8 +33,9 @@ open class ARInfoController {
     // Static Info
     let appId: String   // 需要初始化
     let appVersion:String = "2.0"
-    let deviceId: String = "iOS"
-    let urlServer: String = "http://222.201.145.166:8421/"
+    let deviceId: String = UIDevice.current.name
+    let urlServer: String = "http://www.i-test.com.cn/PerformanceMonitorCenter/"
+//    let urlServer: String = "http://222.201.145.166:8421/"
     
     // upload url
     let startTail: String = "ArAnalysis/BasicInfo/receiveStartUpInfo"
@@ -85,7 +86,7 @@ open class ARInfoController {
             "appVersion": appVersion,
             "deviceId": deviceId,
             "appPackage": "com.victor",
-            "osVersion": "iOS12",
+            "osVersion": UIDevice.current.systemVersion,
             "manufacturer": "apple",
             "accessType": "Wi-Fi",
             "cpu": "A12",
@@ -219,18 +220,18 @@ open class ARInfoController {
         
         var resArr = [[String: String]]()
         
-        var res: [String: String] = [:]
         
         for item in methodList {
             let action: String = item.description
             
+            var res: [String: String] = [:]
             res["model"] = modelName
             res["method"] = action
             
             resArr.append(res)
         }
         
-        print(res)
+        print(resArr)
         
         let parameters: Parameters = [
             "appId": appId,

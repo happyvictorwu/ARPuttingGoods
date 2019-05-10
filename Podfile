@@ -9,6 +9,6 @@ target 'PutSomethingUsingAR' do
   # use_frameworks!
 
   # Pods for PutSomethingUsingAR
-  pod 'ARInfoBox', '~> 0.0.4'
+  pod 'ARInfoBox', '~> 0.0.5'
 
 end
