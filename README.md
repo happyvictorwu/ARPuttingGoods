@@ -1,12 +1,9 @@
 # 项目截图
 
-（我是不会告诉你因为我懒才放截图的）
+后台地址:http://www.i-test.com.cn/page/sdk.html
 
-![IMG_0945](media/15586656007307/IMG_0945.png)
+<div align=center><img width="300" src="media/15586656007307/IMG_0945.png"/></div>
 
-![IMG_0946](media/15586656007307/IMG_0946.png)
+<div align=center><img width="300" src="media/15586656007307/IMG_0946.png"/></div>
 
-![IMG_0947](media/15586656007307/IMG_0947.png)
-
-
-
+<div align=center><img width="300" src="media/15586656007307/IMG_0947.png"/></div>
