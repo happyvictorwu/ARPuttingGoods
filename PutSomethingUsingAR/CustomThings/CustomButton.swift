@@ -9,9 +9,7 @@
 import UIKit
 
 class CustomButton: UIButton {
-    
     override var isSelected: Bool {
-        
         didSet {
             if isSelected {
                 layer.borderColor = UIColor.yellow.cgColor
@@ -20,6 +18,5 @@ class CustomButton: UIButton {
                 layer.borderWidth = 0
             }
         }
-        
     }
 }
