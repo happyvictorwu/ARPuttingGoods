@@ -28,7 +28,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     var arCollection: ARInfoController = ARInfoController(appId: "85d4a553-ee8d-4136-80ab-2469adcae44d")
 
     var currentFurniture: Furniture! // 当前模型信息
-    var currentTime: Int = 0
+    var currentTime: TimeInterval = Date().timeIntervalSince1970
 
     // MARK: - 控件
 
@@ -199,7 +199,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         print("create a new furniture")
         currentFurniture.actionInteractList.append(Action.Add)
         print("a new furniture create a Action-Add")
-        currentTime = 0
+        currentTime = Date().timeIntervalSince1970
         print("time cost calculate begin")
 
         if let hit = sceneView.hitTest(viewCenter, types: [.existingPlaneUsingExtent]).first {
@@ -234,12 +234,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
 //        uploadGazeObject(furniture: self.currentFurniture, urlTail: "ArAnalysis/InteractInfo/receiveGazeObject")
 //
 //        uploadInteractionLostInfo(furniture: self.currentFurniture, urlTail: "ArAnalysis/InteractInfo/receiveInteractListInfo")
+        currentFurniture.costTime = Int((Date().timeIntervalSince1970 - currentTime) / 1000)
         let f_modelName: String = currentFurniture.modelName
         let f_costTime: Int = currentFurniture.costTime
         let f_modelAction: [Action] = currentFurniture.actionInteractList
 
         arCollection.uploadTriggerCount(modelAction: f_modelAction)
-        currentFurniture.costTime = currentTime
         arCollection.uploadGazeObject(modelName: f_modelName, gazeTime: f_costTime)
         arCollection.uploadInteractionLostInfo(modelName: f_modelName, methodList: f_modelAction)
     }
