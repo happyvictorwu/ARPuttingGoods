@@ -218,7 +218,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         measureButton.isHidden = false
 
         // FIXME: upload confirmFurniture info to server
-        print("upload to serve")
+        debugPrint("upload to serve")
 //
 //        uploadCPU(cpu: cpuList, urlTail: "ArAnalysis/CpuInfo/receiveCpuInfo")
 //        print(cpuList)
@@ -234,11 +234,13 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
 //        uploadGazeObject(furniture: self.currentFurniture, urlTail: "ArAnalysis/InteractInfo/receiveGazeObject")
 //
 //        uploadInteractionLostInfo(furniture: self.currentFurniture, urlTail: "ArAnalysis/InteractInfo/receiveInteractListInfo")
-        currentFurniture.costTime = Int((Date().timeIntervalSince1970 - currentTime) / 1000)
+        currentFurniture.costTime = Int(Double(Date().timeIntervalSince1970) - Double(currentTime))
         let f_modelName: String = currentFurniture.modelName
         let f_costTime: Int = currentFurniture.costTime
         let f_modelAction: [Action] = currentFurniture.actionInteractList
-
+        
+        debugPrint(f_costTime)
+        
         arCollection.uploadTriggerCount(modelAction: f_modelAction)
         arCollection.uploadGazeObject(modelName: f_modelName, gazeTime: f_costTime)
         arCollection.uploadInteractionLostInfo(modelName: f_modelName, methodList: f_modelAction)
